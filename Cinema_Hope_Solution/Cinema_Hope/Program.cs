@@ -1,9 +1,13 @@
-using Cinema_Hope;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+var connectionString = builder.Configuration.GetConnectionString("DefualtConnection")
+            ?? throw new InvalidOperationException("No Connection String Was Found");
+
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString)); // Register DbContext 
+
 builder.Services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation(); // I Add this For Speed The  changes in your views immediately without rebuilding the project.
 
