@@ -14,6 +14,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Seat> Seats { get; set; }
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Booking> Bookings { get; set; }
+    public DbSet<Genre> Genres { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
