@@ -59,7 +59,7 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Location>().HasMany(l => l.Cinemas)
                                        .WithOne(cinema => cinema.Location)
                                        .HasForeignKey(cinema => cinema.LocationId)
-                                       .OnDelete(DeleteBehavior.SetNull);
+                                       .OnDelete(DeleteBehavior.NoAction);
 
 
 
