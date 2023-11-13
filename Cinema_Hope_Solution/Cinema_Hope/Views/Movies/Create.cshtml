@@ -1,1 +1,78 @@
-﻿<p>Create Movie</p>
+﻿@model Create_MovieForm_ViewModel
+
+@{
+    ViewData["Title"] = "Add New Movie";
+}
+
+<h5>
+    <i class="bi bi-plus-circle-dotted"></i>
+    Add a new game
+</h5>
+
+
+<form asp-controller="Movies" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Title" class="form-label mt-4"></label>
+                <input type="text" class="form-control" asp-for="Title" placeholder="Name">
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="form-label mt-4"></label>
+                <textarea asp-for="Description" class="form-control" placeholder="Description"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Duration" class="form-label mt-4"></label>
+                <input type="text" class="form-control" asp-for="Duration" placeholder="Duration">
+                <span asp-validation-for="Duration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Language" class="form-label mt-4"></label>
+                <input type="text" class="form-control" asp-for="Language" placeholder="Language">
+                <span asp-validation-for="Language" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Director" class="form-label mt-4"></label>
+                <input type="text" class="form-control" asp-for="Director" placeholder="Director">
+                <span asp-validation-for="Director" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Writers" class="form-label mt-4"></label>
+                <input type="text" class="form-control" asp-for="Writers" placeholder="Writers">
+                <span asp-validation-for="Writers" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductionCompany" class="form-label mt-4"></label>
+                <input type="text" class="form-control" asp-for="ProductionCompany" placeholder="ProductionCompany">
+                <span asp-validation-for="ProductionCompany" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReleaseDate" class="form-label mt-4"></label>
+                <input type="text" class="form-control" asp-for="ReleaseDate" placeholder="ReleaseDate">
+                <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GenraId" class="form-label mt-4"></label>
+                <select class="form-select" asp-for="GenraId" asp-items="Model.AllGeners">
+                    <option>Select a Genre</option>
+                </select>
+                <span asp-validation-for="GenraId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PosterUrl" class="form-label mt-4"></label>
+                <input type="file" class="form-control" asp-for="PosterUrl">
+                <small class="form-text text-muted">Only .jpg, .jpeg, .png files are allowed with max size 1MB.</small>
+                <span asp-validation-for="PosterUrl" class="text-danger d-block"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TrailerUrl" class="form-label mt-4"></label>
+                <input type="text" class="form-control" asp-for="TrailerUrl" placeholder="TrailerUrl">
+                <span asp-validation-for="TrailerUrl" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-light text-black mt-4">Save</button>
+        </div>
+        <div class="col-md-6"></div>
+    </div>
+</form>

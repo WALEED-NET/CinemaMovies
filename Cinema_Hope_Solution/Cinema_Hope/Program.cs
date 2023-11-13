@@ -8,6 +8,8 @@ var connectionString = builder.Configuration.GetConnectionString("DefualtConnect
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString)); // Register DbContext 
 
+builder.Services.AddScoped<IGenresServices, GenresServices>();  // inject IGenresServices.
+
 builder.Services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation(); // I Add this For Speed The  changes in your views immediately without rebuilding the project.
 

@@ -4,4 +4,10 @@ global using Cinema_Hope.Enums;
 global using Cinema_Hope.Models;
 global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using Cinema_Hope.Data.ModelsConfigurations;
+global using System.ComponentModel.DataAnnotations;
+global using Microsoft.AspNetCore.Mvc;
+global using Cinema_Hope.ViewModels;
+global using Microsoft.AspNetCore.Mvc.Rendering;
+global using Cinema_Hope.Services;
+
 
