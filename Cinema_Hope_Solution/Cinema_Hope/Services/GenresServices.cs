@@ -15,6 +15,7 @@
             return _context.Genres
                             .Select(genre => new SelectListItem { Value = genre.GenreId.ToString(), Text = genre.Name })
                             .OrderBy(c => c.Text)
+                            .AsNoTracking()
                             .ToList();
         }
     }

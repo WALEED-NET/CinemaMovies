@@ -4,11 +4,13 @@
     {
         private readonly ApplicationDbContext _context;
         private readonly IGenresServices _genresServices;   // Services
+        private readonly IMovieServices  _movieServices;   // Services
 
-        public MoviesController(ApplicationDbContext context, IGenresServices genresServices)
+        public MoviesController(ApplicationDbContext context, IGenresServices genresServices, IMovieServices movieServices)
         {
             _context = context;
             _genresServices = genresServices;
+            _movieServices = movieServices;
         }
 
         public IActionResult Index()
@@ -29,7 +31,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Create_MovieForm_ViewModel model)
+        public async Task<IActionResult> Create(Create_MovieForm_ViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -39,7 +41,11 @@
                 return View(model);
             }
 
-            return View();
+            // Save Movie To Database
+            // Save Movie Poster To Server.
+            await _movieServices.Create(model);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

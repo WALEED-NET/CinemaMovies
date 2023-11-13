@@ -10,8 +10,10 @@ namespace Cinema_Hope.ViewModels
         [Range(0, 1000)]
         public int Duration { get; set; }
 
+        // Validate Extention and size
         public IFormFile PosterUrl { get; set; } = default!;
         public string TrailerUrl { get; set; } = string.Empty;
+
 
         public string Language { get; set; } = string.Empty;
         public string Director { get; set; } = string.Empty;
@@ -20,7 +22,7 @@ namespace Cinema_Hope.ViewModels
         public DateTime ReleaseDate { get; set; }
 
         [Display(Name = "النوع" )]
-        public short GenraId { get; set; }  // Foreign key
+        public short GenreId { get; set; }  // Foreign key
 
         public IEnumerable<SelectListItem> AllGeners = Enumerable.Empty<SelectListItem>(); // for View this Is SelectMenu DropDown
 
