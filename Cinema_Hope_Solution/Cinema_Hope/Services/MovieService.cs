@@ -1,11 +1,11 @@
 ﻿namespace Cinema_Hope.Services
 {
-    public class MovieServices : IMovieServices
+    public class MovieService : IMovieService
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly string _imagesPath;
-        public MovieServices(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
+        public MovieService(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
@@ -24,8 +24,6 @@
             using var stream = File.Create(path);
             await model.PosterUrl.CopyToAsync(stream);
 
-            // Dispose stream
-            stream.Dispose();
 
             // ready to save Movie in Database
             Movie movie = new()
