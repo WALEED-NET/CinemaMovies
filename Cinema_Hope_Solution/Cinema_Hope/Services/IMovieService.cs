@@ -1,6 +1,6 @@
 ﻿namespace Cinema_Hope.Services
 {
-    public interface IMovieServices
+    public interface IMovieService
     {
         Task Create(Create_MovieForm_ViewModel model);
     }

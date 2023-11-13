@@ -1,10 +1,10 @@
 ﻿namespace Cinema_Hope.Services
 {
-    public class GenresServices : IGenresServices
+    public class GenresService : IGenresService
     {
         private readonly ApplicationDbContext _context;
 
-        public GenresServices(ApplicationDbContext context)
+        public GenresService(ApplicationDbContext context)
         {
             _context = context;
         }

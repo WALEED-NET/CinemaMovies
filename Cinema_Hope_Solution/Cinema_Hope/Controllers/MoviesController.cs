@@ -3,10 +3,10 @@
     public class MoviesController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly IGenresServices _genresServices;   // Services
-        private readonly IMovieServices  _movieServices;   // Services
+        private readonly IGenresService _genresServices;   // Services
+        private readonly IMovieService  _movieServices;   // Services
 
-        public MoviesController(ApplicationDbContext context, IGenresServices genresServices, IMovieServices movieServices)
+        public MoviesController(ApplicationDbContext context, IGenresService genresServices, IMovieService movieServices)
         {
             _context = context;
             _genresServices = genresServices;
