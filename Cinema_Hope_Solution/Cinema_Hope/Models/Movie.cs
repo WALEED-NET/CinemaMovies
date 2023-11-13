@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Cinema_Hope.Models
 {
@@ -16,7 +17,6 @@ namespace Cinema_Hope.Models
         [Range(0,1000)]
         public int Duration { get; set; }
 
-        public string? Genre { get; set; }
         public string? PosterUrl { get; set; }
         public string? TrailerUrl { get; set; }
 
@@ -30,7 +30,15 @@ namespace Cinema_Hope.Models
         public DateTime ReleaseDate { get; set; }
         public string? Status { get; set; }
 
+
+        [Display(Name = "Genre"), Required]
+        public int GenreId { get; set; }
+
         // Navigation property
+
+        [ForeignKey(nameof(GenreId))]
+        public Genre? Genre { get; set; }
+
         public ICollection<ShowTime> Showtimes { get; set; }
     }
 }
