@@ -9,7 +9,7 @@
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
-            _imagesPath = $"{_webHostEnvironment.WebRootPath}/assets/images/movies";
+            _imagesPath = $"{_webHostEnvironment.WebRootPath}{FileSettings.ImagesPath}";
         }
 
         public async Task Create(Create_MovieForm_ViewModel model)

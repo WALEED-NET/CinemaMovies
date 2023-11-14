@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Cinema_Hope.Attributes;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Cinema_Hope.ViewModels
 {
@@ -11,7 +12,9 @@ namespace Cinema_Hope.ViewModels
         public int Duration { get; set; }
 
         // Validate Extention and size
+        [AlowedExtensions(FileSettings.AlowedExtensions)]
         public IFormFile PosterUrl { get; set; } = default!;
+
         public string TrailerUrl { get; set; } = string.Empty;
 
 
