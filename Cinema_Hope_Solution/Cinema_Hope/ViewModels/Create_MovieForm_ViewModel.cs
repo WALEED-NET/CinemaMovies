@@ -11,8 +11,7 @@ namespace Cinema_Hope.ViewModels
         [Range(0, 1000)]
         public int Duration { get; set; }
 
-        // Validate Extention and size
-        [AlowedExtensions(FileSettings.AlowedExtensions)]
+        [AlowedExtensions(FileSettings.AlowedExtensions) , MaxFileSize(FileSettings.MaxFileSizeInBytes) ]
         public IFormFile PosterUrl { get; set; } = default!;
 
         public string TrailerUrl { get; set; } = string.Empty;

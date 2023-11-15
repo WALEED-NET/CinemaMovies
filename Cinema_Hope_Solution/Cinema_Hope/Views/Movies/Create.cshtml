@@ -63,7 +63,7 @@
             <div class="form-group">
                 <label asp-for="PosterUrl" class="form-label mt-4"></label>
                 <input type="file" class="form-control" asp-for="PosterUrl">
-                <small class="form-text text-muted">Only .jpg, .jpeg, .png files are allowed with max size 1MB.</small>
+                <small class="form-text text-muted">Only @FileSettings.AlowedExtensions files are allowed with max size @(FileSettings.MaxFileSizeInMB) MB.</small>
                 <span asp-validation-for="PosterUrl" class="text-danger d-block"></span>
             </div>
             <div class="form-group">

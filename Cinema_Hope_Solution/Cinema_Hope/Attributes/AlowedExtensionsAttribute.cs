@@ -1,10 +1,10 @@
 ﻿namespace Cinema_Hope.Attributes
 {
-    public class AlowedExtensions : ValidationAttribute
+    public class AlowedExtensionsAttribute : ValidationAttribute
     {
         private readonly string _AlowedExtension;
 
-        public AlowedExtensions(string alowedExtension)
+        public AlowedExtensionsAttribute(string alowedExtension)
         {
             _AlowedExtension = alowedExtension;
         }
