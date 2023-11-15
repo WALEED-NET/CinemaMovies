@@ -62,8 +62,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="PosterUrl" class="form-label mt-4"></label>
-                <input type="file" class="form-control" asp-for="PosterUrl">
-                <small class="form-text text-muted">Only @FileSettings.AlowedExtensions files are allowed with max size @(FileSettings.MaxFileSizeInMB) MB.</small>
+                <input type="file" class="form-control" asp-for="PosterUrl"
+                    data-rule-extension="@FileSettings.AlowedExtensions.Replace( "." , string.Empty)"
+                    data-msg-extension="Not Allowed extension " data-rule-filesize="@FileSettings.MaxFileSizeInBytes"
+                    data-msg-filesize="Maximum allowed Size is @FileSettings.MaxFileSizeInMB MB">
+                <small class="form-text text-muted">Only @FileSettings.AlowedExtensions files are allowed with max size
+                    @(FileSettings.MaxFileSizeInMB) MB.</small>
                 <span asp-validation-for="PosterUrl" class="text-danger d-block"></span>
             </div>
             <div class="form-group">
@@ -77,6 +81,12 @@
     </div>
 </form>
 
-@section Scripts{
+@section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        $.validator.addMethod('filesize', function (value, element, param)
+        {
+            return this.optional(element) || element.files[0].size <= param;
+        });
+    </script>
 }
