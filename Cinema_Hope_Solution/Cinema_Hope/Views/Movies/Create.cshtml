@@ -56,7 +56,7 @@
             <div class="form-group">
                 <label asp-for="GenreId" class="form-label mt-4"></label>
                 <select class="form-select" asp-for="GenreId" asp-items="Model.AllGeners">
-                    <option>Select a Genre</option>
+                    <option value="">Select a Genre</option>
                 </select>
                 <span asp-validation-for="GenreId" class="text-danger"></span>
             </div>
@@ -76,3 +76,7 @@
         <div class="col-md-6"></div>
     </div>
 </form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
