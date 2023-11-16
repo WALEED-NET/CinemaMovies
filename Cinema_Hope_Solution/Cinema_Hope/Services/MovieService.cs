@@ -46,5 +46,13 @@
             _context.Add(movie);
             _context.SaveChanges();
         }
+
+        public IEnumerable<Movie> GetAll()
+        {
+            return _context.Movies
+                .Include( m => m.Genre)
+                .AsNoTracking()
+                .ToList();
+        }
     }
 }

@@ -6,16 +6,17 @@ namespace Cinema_Hope.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IMovieService _movieService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController( IMovieService movieService )
         {
-            _logger = logger;
+            _movieService = movieService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Movie> movies = _movieService.GetAll();
+            return View(movies);
         }
 
        
