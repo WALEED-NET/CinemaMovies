@@ -21,7 +21,10 @@
         href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
         rel="stylesheet">
 
+    <!-- File Of Styling Selectlist -->
+    <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
 
+    <!-- This File Site.css Always Should be tha last bottom -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Cinema_Hope.styles.css" asp-append-version="true" />
 </head>
@@ -59,6 +62,10 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- File Of Styling Selectlist -->
+    <script src="~/lib/select2/js/select2.min.js"></script>
+
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
