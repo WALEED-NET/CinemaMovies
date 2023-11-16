@@ -24,3 +24,10 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* Start Custom Styles */
+.movie-poster {
+  max-height: 500px;
+  border-radius: 8px;
+}
+/* End Custom Styles */

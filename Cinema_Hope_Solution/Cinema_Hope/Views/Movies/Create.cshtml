@@ -77,7 +77,9 @@
             </div>
             <button type="submit" class="btn btn-light text-black mt-4">Save</button>
         </div>
-        <div class="col-md-6"></div>
+        <div class="col-md-6 d-flex justify-content-center pt-4 overflow-hidden">
+            <img class="movie-poster d-none" alt="Poster" />
+        </div>
     </div>
 </form>
 
@@ -87,6 +89,14 @@
         $.validator.addMethod('filesize', function (value, element, param)
         {
             return this.optional(element) || element.files[0].size <= param;
+        });
+
+        $(document).ready(function ()
+        {
+            $('#PosterUrl').on('change', function ()
+            {
+                $('.movie-poster').attr('src', window.URL.createObjectURL(this.files[0])).removeClass('d-none');
+            });
         });
     </script>
 }
