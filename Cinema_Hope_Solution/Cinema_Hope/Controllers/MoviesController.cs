@@ -4,18 +4,19 @@
     {
         private readonly ApplicationDbContext _context;
         private readonly IGenresService _genresServices;   // Services
-        private readonly IMovieService  _movieServices;   // Services
+        private readonly IMovieService  _movieService;   // Services
 
-        public MoviesController(ApplicationDbContext context, IGenresService genresServices, IMovieService movieServices)
+        public MoviesController(ApplicationDbContext context, IGenresService genresServices, IMovieService movieService)
         {
             _context = context;
             _genresServices = genresServices;
-            _movieServices = movieServices;
+            _movieService = movieService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Movie> movies = _movieService.GetAll();
+            return View(movies);
         }
 
         [HttpGet]
@@ -43,7 +44,7 @@
 
             // Save Movie To Database
             // Save Movie Poster To Server.
-            await _movieServices.Create(model);
+            await _movieService.Create(model);
 
             return RedirectToAction(nameof(Index));
         }
