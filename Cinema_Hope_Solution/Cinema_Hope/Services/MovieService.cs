@@ -54,5 +54,13 @@
                 .AsNoTracking()
                 .ToList();
         }
+
+        public Movie? GetById(int id)
+        {
+            return _context.Movies
+               .Include(m => m.Genre)
+               .AsNoTracking()
+               .SingleOrDefault( m => m.MovieId == id);
+        }
     }
 }

@@ -19,6 +19,16 @@
             return View(movies);
         }
 
+        public IActionResult Details(int id)
+        {
+            var movie = _movieService.GetById(id);
+
+            if (movie is null)
+                return NotFound();
+
+            return View(movie);
+        }
+
         [HttpGet]
         public IActionResult Create()
         {
