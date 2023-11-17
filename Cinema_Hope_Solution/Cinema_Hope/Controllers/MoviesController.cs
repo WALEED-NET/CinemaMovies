@@ -30,6 +30,35 @@
         }
 
         [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            Movie? movieInDB = _movieService.GetById(id);
+
+            if (movieInDB is null)
+                return NotFound();
+
+            // pass data to ViewModel
+            Edit_MovieForm_ViewModel viewModel = new()
+            {
+                MovieId = id,
+                Title = movieInDB.Title,
+                Description = movieInDB.Description,
+                Director = movieInDB.Director,
+                Duration = movieInDB.Duration,
+                GenreId = movieInDB.GenreId , 
+                Language = movieInDB.Language,
+                ProductionCompany = movieInDB.ProductionCompany,
+                ReleaseDate = movieInDB.ReleaseDate,
+                Writers = movieInDB.Writers,
+                TrailerUrl = movieInDB.TrailerUrl,
+                AllGeners = _genresServices.GetSelectListOf_Genres(),
+                CurrentPoster = movieInDB.PosterUrl
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpGet]
         public IActionResult Create()
         {
             Create_MovieForm_ViewModel model = new()
