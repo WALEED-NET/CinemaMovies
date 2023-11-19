@@ -6,6 +6,8 @@
 
         public required string? CurrentPoster { get; set; }
 
+        public string? Status { get; set; }
+
         [AlowedExtensions(FileSettings.AlowedExtensions), MaxFileSize(FileSettings.MaxFileSizeInBytes)]
         public IFormFile? PosterUrl { get; set; } 
     }

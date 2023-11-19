@@ -13,6 +13,7 @@
 <form asp-controller="Movies" enctype="multipart/form-data">
     <div class="row">
         <div class="col-md-6">
+            <input hidden asp-for="MovieId"/>
             <div class="form-group">
                 <label asp-for="Title" class="form-label mt-4"></label>
                 <input type="text" class="form-control" asp-for="Title" placeholder="Name">
@@ -52,6 +53,11 @@
                 <label asp-for="ReleaseDate" class="form-label mt-4"></label>
                 <input type="text" class="form-control" asp-for="ReleaseDate" placeholder="ReleaseDate">
                 <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="form-label mt-4"></label>
+                <input type="text" class="form-control" asp-for="Status" placeholder="Status">
+                <span asp-validation-for="Status" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="GenreId" class="form-label mt-4"></label>

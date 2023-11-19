@@ -30,35 +30,6 @@
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
-        {
-            Movie? movieInDB = _movieService.GetById(id);
-
-            if (movieInDB is null)
-                return NotFound();
-
-            // pass data to ViewModel
-            Edit_MovieForm_ViewModel viewModel = new()
-            {
-                MovieId = id,
-                Title = movieInDB.Title,
-                Description = movieInDB.Description,
-                Director = movieInDB.Director,
-                Duration = movieInDB.Duration,
-                GenreId = movieInDB.GenreId , 
-                Language = movieInDB.Language,
-                ProductionCompany = movieInDB.ProductionCompany,
-                ReleaseDate = movieInDB.ReleaseDate,
-                Writers = movieInDB.Writers,
-                TrailerUrl = movieInDB.TrailerUrl,
-                AllGeners = _genresServices.GetSelectListOf_Genres(),
-                CurrentPoster = movieInDB.PosterUrl
-            };
-
-            return View(viewModel);
-        }
-
-        [HttpGet]
         public IActionResult Create()
         {
             Create_MovieForm_ViewModel model = new()
@@ -87,5 +58,62 @@
 
             return RedirectToAction(nameof(Index));
         }
+
+
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            Movie? movieInDB = _movieService.GetById(id);
+
+            if (movieInDB is null)
+                return NotFound();
+
+            // pass data to ViewModel
+            Edit_MovieForm_ViewModel viewModel = new()
+            {
+                MovieId = id,
+                Title = movieInDB.Title,
+                Description = movieInDB.Description,
+                Director = movieInDB.Director,
+                Duration = movieInDB.Duration,
+                GenreId = movieInDB.GenreId,
+                Language = movieInDB.Language,
+                ProductionCompany = movieInDB.ProductionCompany,
+                ReleaseDate = movieInDB.ReleaseDate,
+                Writers = movieInDB.Writers,
+                TrailerUrl = movieInDB.TrailerUrl,
+                AllGeners = _genresServices.GetSelectListOf_Genres(),
+                CurrentPoster = movieInDB.PosterUrl
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(Edit_MovieForm_ViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                // after that model is not vaild remember to initialize nessury field of model before return it.
+                model.AllGeners = _genresServices.GetSelectListOf_Genres();
+                model.CurrentPoster = _movieService.GetById(model.MovieId).PosterUrl ?? "No Movie with Id ";
+
+
+                return View(model);
+            }
+
+            // Save Movie To Database
+            // Save Movie Poster To Server.
+            var movie = await _movieService.Edit(model);
+
+            if (movie is null)
+                return BadRequest();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
     }
 }

@@ -15,14 +15,7 @@
         public async Task Create(Create_MovieForm_ViewModel model)
         {
             // Generate Name For Poster Nnme  of Movie when saving
-            var posterNameInDB = $"{Guid.NewGuid()}{Path.GetExtension(model.PosterUrl.FileName)}";
-
-            // Path for saving image
-            var path = Path.Combine(_imagesPath, posterNameInDB);
-
-            // save using stream
-            using var stream = File.Create(path);
-            await model.PosterUrl.CopyToAsync(stream);
+            var posterNameInDB = await SavePoster(model.PosterUrl);
 
 
             // ready to save Movie in Database
@@ -47,6 +40,63 @@
             _context.SaveChanges();
         }
 
+        public async Task<Movie?> Edit(Edit_MovieForm_ViewModel model)
+        {
+            // check if null
+
+            var movieInDB = _context.Movies
+                    .Include( m => m.Genre)
+                    .SingleOrDefault( m => m.MovieId == model.MovieId);
+
+            if (movieInDB == null)
+                return null;
+
+            // check Poster if has new poster to edit
+            var hasNewPoster = model.PosterUrl is not null;
+            var oldPoster = movieInDB.PosterUrl;
+
+            if (hasNewPoster)
+            {
+                movieInDB.PosterUrl = await SavePoster(model.PosterUrl!);
+            }
+
+            // map new Values From viewModel To EntityInDB
+
+            movieInDB.Title = model.Title;
+            movieInDB.Description = model.Description;
+            movieInDB.Director = model.Director;
+            movieInDB.Duration = model.Duration;
+            movieInDB.Status = model.Status;
+            movieInDB.Writers = model.Writers;
+            movieInDB.GenreId = model.GenreId;
+            movieInDB.ProductionCompany = model.ProductionCompany;
+            movieInDB.Language = model.Language;
+            movieInDB.ReleaseDate = model.ReleaseDate;
+            movieInDB.TrailerUrl = model.TrailerUrl;
+
+            // Save Changes
+            var effectedRows = _context.SaveChanges();
+
+            //check if rows effected , then delete old poster if it replaced with new.
+            if (effectedRows > 0 )
+            {
+                if (hasNewPoster) // means that if only user realy has changed the poster. then we need to delete old one.
+                {
+                    string poster = Path.Combine(_imagesPath, oldPoster);
+                    File.Delete(poster);
+                }
+                return movieInDB;
+            }
+            else
+            {
+                // if changes does not effected, delete new poster the we try to update , and return null 
+                string poster = Path.Combine(_imagesPath, movieInDB.PosterUrl);
+                File.Delete(poster);
+
+                return null;
+            }
+        }
+
         public IEnumerable<Movie> GetAll()
         {
             return _context.Movies
@@ -61,6 +111,21 @@
                .Include(m => m.Genre)
                .AsNoTracking()
                .SingleOrDefault( m => m.MovieId == id);
+        }
+
+        private async Task<string> SavePoster (IFormFile poster)
+        {
+            // Generate Name For Poster Nnme  of Movie when saving
+            var posterNameInServer = $"{Guid.NewGuid()}{Path.GetExtension(poster.FileName)}";
+
+            // Path for saving image
+            var path = Path.Combine(_imagesPath, posterNameInServer);
+
+            // save using stream
+            using var stream = File.Create(path);
+            await poster.CopyToAsync(stream);
+
+            return posterNameInServer;
         }
     }
 }
