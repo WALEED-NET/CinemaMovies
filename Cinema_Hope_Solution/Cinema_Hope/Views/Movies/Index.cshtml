@@ -40,7 +40,7 @@ else
                                 <a  class="btn btn-info rounded rounded-3 me-2" asp-action="Edit" asp-controller="Movies" asp-route-id="@movie.MovieId">
                                     <i class="bi bi-pencil-fill"></i>
                                 </a>
-                                <a class="btn btn-danger rounded rounded-3" asp-action="Edit" asp-controller="Movies" asp-route-id="@movie.MovieId">
+                                <a class="btn btn-danger rounded rounded-3 js-delete" data-id="@movie.MovieId" >
                                     <i class="bi bi-trash3"></i>
                                 </a>
                             </div>
@@ -50,4 +50,8 @@ else
             </tbody>
         </table>
     </div>
+}
+
+@section Scripts{
+    <script src="~/js/movies-index.js" asp-append-version="true"></script>
 }

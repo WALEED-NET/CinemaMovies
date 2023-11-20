@@ -8,10 +8,12 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\js\filesize-validator.js" />
+    <Content Remove="wwwroot\js\movies-index.js" />
   </ItemGroup>
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\js\filesize-validator.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\movies-index.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +36,7 @@
 
   <ItemGroup>
     <None Include="wwwroot\js\filesize-validator.js" />
+    <None Include="wwwroot\js\movies-index.js" />
   </ItemGroup>
 
 </Project>

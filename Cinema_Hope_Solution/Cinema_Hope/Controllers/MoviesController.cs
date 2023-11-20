@@ -115,5 +115,12 @@
         }
 
 
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var isDeleted = _movieService.Delete(id);
+
+            return isDeleted ? Ok() : BadRequest() ;
+        }
     }
 }

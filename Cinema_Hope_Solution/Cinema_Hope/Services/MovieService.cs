@@ -113,6 +113,30 @@
                .SingleOrDefault( m => m.MovieId == id);
         }
 
+        public bool Delete(int id)
+        {
+            var isDeleted = false;
+
+            var movieInDB = _context.Movies.Find(id);
+
+            if (movieInDB is null)
+                return false;
+
+            _context.Movies.Remove(movieInDB);
+            
+            var effectedRows = _context.SaveChanges();
+            if (effectedRows > 0 )
+            {
+                // now need to delete Poster form server.
+                isDeleted = true;
+                string posterInserver_Path = Path.Combine(_imagesPath,movieInDB.PosterUrl);
+
+                File.Delete(posterInserver_Path);
+            }
+
+            return isDeleted;
+        }
+
         private async Task<string> SavePoster (IFormFile poster)
         {
             // Generate Name For Poster Nnme  of Movie when saving
