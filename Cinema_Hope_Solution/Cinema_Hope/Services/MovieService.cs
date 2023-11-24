@@ -109,7 +109,7 @@
         {
             return _context.Movies
                .Include(m => m.Genre)
-               .AsNoTracking()
+               //.AsNoTracking()
                .SingleOrDefault( m => m.MovieId == id);
         }
 
