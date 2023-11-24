@@ -8,12 +8,12 @@
         {
             _context = context;
         }
-        public IEnumerable<Cinema> GetAll()
+        public  async Task<IEnumerable<Cinema>> GetAllAsync()
         {
-            return _context.Cinemas
+            return await _context.Cinemas
                 .Include(c => c.Location)
                 .AsNoTracking()
-                .ToList();
+                .ToListAsync();
         }
 
         public Cinema? GetById(int id)
@@ -42,5 +42,58 @@
             
         }
 
+        public async Task<Cinema?> Edit(Edit_Cinema_ViewModel model)
+        {
+            //check if Entity null in DB
+
+            var cinemaInDB = _context.Cinemas.Include(c => c.Location)
+                                         .SingleOrDefault(c => c.CinemaId == model.CinemaId);
+
+            if (cinemaInDB == null)
+                return null;
+
+            // map new Values From viewModel To EntityInDB
+
+            cinemaInDB.Name = model.Name;
+            cinemaInDB.Address = model.Address;
+            cinemaInDB.Email = model.Email;
+            cinemaInDB.LocationId = model.LocationId;
+            cinemaInDB.Phone = model.Phone;
+            cinemaInDB.PostalCode = model.PostalCode;
+
+            // Save Changes
+            var effectedRows = await _context.SaveChangesAsync();
+
+            //check if rows effected , then delete old poster if it replaced with new.
+            if (effectedRows > 0)
+            {
+              
+                return cinemaInDB;
+            }
+            else
+            {
+                // if changes does not effected,   return null 
+                return null;
+            }
+        }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+            var isDeleted = false;
+
+            Cinema? cinemaInDB = await _context.Cinemas.Include(c => c.Screens).SingleOrDefaultAsync(c => c.CinemaId == id);
+
+            if (cinemaInDB is null)
+                return false;
+
+            _context.Cinemas.Remove(cinemaInDB);
+
+            int effectedRows = await _context.SaveChangesAsync();
+
+            if (effectedRows > 0)
+                isDeleted = true;
+
+            return isDeleted;
+        }
     }
 }

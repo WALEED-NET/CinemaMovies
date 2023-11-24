@@ -3,8 +3,8 @@
     public class CinemasController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly ILocationService _locationService;
-        private readonly ICinemaService _cinemaService;
+        private readonly ILocationService _locationService; // Service
+        private readonly ICinemaService _cinemaService; // Service
 
 
         public CinemasController(ApplicationDbContext context, ILocationService locationService, ICinemaService cinemaService)
@@ -17,36 +17,24 @@
         // GET: Cinemas
         public async Task<IActionResult> Index()
         {
-            var cinemas = _cinemaService.GetAll();
+            var cinemas = await _cinemaService.GetAllAsync();
             return View(cinemas);
-            //var applicationDbContext = _context.Cinemas.Include(c => c.Location);
         }
 
 
 
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int id)
         {
-            if (id == null || _context.Cinemas == null)
-            {
-                return NotFound();
-            }
-
-            //var cinema = await _context.Cinemas
-            //    .Include(c => c.Location)
-            //    .FirstOrDefaultAsync(m => m.CinemaId == id);
-
             var cinema = _cinemaService.GetById( (int) id);
 
-            if (cinema == null)
-            {
+            if (cinema is null)
                 return NotFound();
-            }
 
             return View(cinema);
         }
 
 
-        // GET: Cinemas/Create
+        [HttpGet]
         public IActionResult Create()
         {
             Create_CinemaViewModel model = new()
@@ -64,6 +52,8 @@
         {
             if (! ModelState.IsValid)
             {
+                // after that model is not vaild remember to initialize nessury field of model before return it.
+
                 model.Locations = _locationService.GetSelectListOf_Locations();
                 return View(model);
             }
@@ -75,101 +65,59 @@
         }
 
 
-
-        // GET: Cinemas/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        [HttpGet]
+        public IActionResult Edit(int id)
         {
-            if (id == null || _context.Cinemas == null)
-            {
-                return NotFound();
-            }
+            Cinema? cinemaInDB = _cinemaService.GetById(id);
 
-            var cinema = await _context.Cinemas.FindAsync(id);
-            if (cinema == null)
-            {
+            if (cinemaInDB is null)
                 return NotFound();
-            }
-            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationId", cinema.LocationId);
-            return View(cinema);
+
+            // pass data to ViewModel From Entity In DB
+            Edit_Cinema_ViewModel viewModel = new()
+            {
+                Name = cinemaInDB.Name,
+                Address = cinemaInDB.Address,
+                CinemaId = cinemaInDB.CinemaId,
+                Email = cinemaInDB.Email,
+                LocationId = cinemaInDB.LocationId,
+                Phone = cinemaInDB.Phone,
+                PostalCode = cinemaInDB.PostalCode,
+                Locations = _locationService.GetSelectListOf_Locations()
+            };
+
+            return View(viewModel);
         }
 
-        // POST: Cinemas/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CinemaId,Name,LocationId,Address,PostalCode,Phone,Email")] Cinema cinema)
+        public async Task<IActionResult> Edit( Edit_Cinema_ViewModel model )
         {
-            if (id != cinema.CinemaId)
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                // after that model is not vaild remember to initialize nessury field of model before return it.
+
+                model.Locations = _locationService.GetSelectListOf_Locations();
+                return View(model);
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(cinema);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CinemaExists(cinema.CinemaId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["LocationId"] = new SelectList(_context.Locations, "LocationId", "LocationId", cinema.LocationId);
-            return View(cinema);
-        }
+            // Save Entity To Database using Service : var entity = _service.Edit(model)
+            Cinema? cinemaToDB = await _cinemaService.Edit(model);
 
-        // GET: Cinemas/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Cinemas == null)
-            {
-                return NotFound();
-            }
+            // check if entity null , means that BadRequest
+            if (cinemaToDB is null)
+                return BadRequest();
 
-            var cinema = await _context.Cinemas
-                .Include(c => c.Location)
-                .FirstOrDefaultAsync(m => m.CinemaId == id);
-            if (cinema == null)
-            {
-                return NotFound();
-            }
-
-            return View(cinema);
-        }
-
-        // POST: Cinemas/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.Cinemas == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.Cinemas'  is null.");
-            }
-            var cinema = await _context.Cinemas.FindAsync(id);
-            if (cinema != null)
-            {
-                _context.Cinemas.Remove(cinema);
-            }
-            
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CinemaExists(int id)
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
         {
-          return (_context.Cinemas?.Any(e => e.CinemaId == id)).GetValueOrDefault();
+            bool isDeleted = await _cinemaService.DeleteAsync(id);
+
+            return isDeleted ? Ok() : BadRequest("Bad Requist");
         }
     }
 }
