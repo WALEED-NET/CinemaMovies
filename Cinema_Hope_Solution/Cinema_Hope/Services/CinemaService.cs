@@ -64,10 +64,9 @@
             // Save Changes
             var effectedRows = await _context.SaveChangesAsync();
 
-            //check if rows effected , then delete old poster if it replaced with new.
+            //check if rows effected , .
             if (effectedRows > 0)
             {
-              
                 return cinemaInDB;
             }
             else
@@ -94,6 +93,14 @@
                 isDeleted = true;
 
             return isDeleted;
+        }
+
+        public IEnumerable<SelectListItem> GetSelectListOf_Cinemas()
+        {
+            return _context.Cinemas.Select(c => new SelectListItem { Value = c.CinemaId.ToString(), Text = c.Name })
+                                    .OrderBy(c => c.Text)
+                                    .AsNoTracking()
+                                    .ToList();
         }
     }
 }

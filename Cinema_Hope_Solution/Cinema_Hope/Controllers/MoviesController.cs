@@ -70,7 +70,7 @@
                 return NotFound();
 
             // pass data to ViewModel
-            Edit_MovieForm_ViewModel viewModel = new()
+            Edit_MovieForm_ViewModel viewModel = new()      // will use auto mapper instead of all these lines
             {
                 MovieId = id,
                 Title = movieInDB.Title,

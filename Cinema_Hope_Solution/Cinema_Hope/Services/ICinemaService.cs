@@ -4,6 +4,8 @@
     {
          Task<IEnumerable<Cinema>> GetAllAsync();
 
+         IEnumerable<SelectListItem> GetSelectListOf_Cinemas(); // for View used
+
          Cinema? GetById(int id);
 
          Task Create(Create_CinemaViewModel model);

@@ -4,9 +4,21 @@ namespace Cinema_Hope.Models
     public class Screen
     {
         public int ScreenId { get; set; }
+
+
+        [Display(Name = "اسم السينماء")]
         public int CinemaId { get; set; } // Foreign key
+
+
+        [Display(Name = "ترتيب الشاشه التابعه للسينماء")]
         public int ScreenNumber { get; set; }
+
+
+        [Display(Name = "عدد الكراسي للشاشه")]
         public int Capacity { get; set; }
+
+
+        [Display(Name = "نوع الشاشه")]
         public ScreenType ScreenType { get; set; }
 
         // Navigation properties
