@@ -11,5 +11,7 @@
         Task<Movie?> Edit(Edit_MovieForm_ViewModel model);
 
         bool Delete(int id);
+
+        IEnumerable<SelectListItem> GetSelectListOf_Movies();
     }
 }

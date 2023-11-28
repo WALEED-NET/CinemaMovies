@@ -103,5 +103,20 @@ namespace Cinema_Hope.Services
 
             return screenTypes;
         }
+
+        public IEnumerable<SelectListItem> GetSelectListOf_Screens()
+        {
+
+            return _context.Screens.Include(s => s.Cinema)
+                .AsNoTracking()
+                .ToList() // Fetch data into memory
+                .Select(s => new SelectListItem
+                {
+                    Text = $"{s.Cinema.Name} screen number : {s.ScreenNumber} ",
+                    Value = s.ScreenId.ToString()
+
+                }).OrderBy(s => s.Text);
+
+        }
     }
 }

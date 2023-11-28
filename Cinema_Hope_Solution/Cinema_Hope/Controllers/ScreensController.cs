@@ -69,14 +69,6 @@ namespace Cinema_Hope.Controllers
 
             return RedirectToAction(nameof(Index));
 
-            //if (ModelState.IsValid)
-            //{
-            //    _context.Add(screen);
-            //    await _context.SaveChangesAsync();
-            //    return RedirectToAction(nameof(Index));
-            //}
-            //ViewData["CinemaId"] = new SelectList(_context.Cinemas, "CinemaId", "Name", screen.CinemaId);
-            //return View(screen)
         }
 
 
@@ -102,20 +94,6 @@ namespace Cinema_Hope.Controllers
             };
 
             return View(viewModel);
-
-
-            //if (id == null || _context.Screens == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //var screen = await _context.Screens.FindAsync(id);
-            //if (screen == null)
-            //{
-            //    return NotFound();
-            //}
-            //ViewData["CinemaId"] = new SelectList(_context.Cinemas, "CinemaId", "Name", screen.CinemaId);
-            //return View(screen);
         }
 
         // POST: Screens/Edit/5
@@ -134,7 +112,7 @@ namespace Cinema_Hope.Controllers
                 return View(model);
             }
 
-            // Save Entity To Database using Service : var entity = _service.Edit(model)
+            // Edit Entity in Database using Service : var entity = _service.Edit(model)
             Screen? screenToDB = await _screenService.Edit(model);
 
             // check if entity null , means that BadRequest

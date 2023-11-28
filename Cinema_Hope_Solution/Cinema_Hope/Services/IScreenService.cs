@@ -10,5 +10,6 @@
         Task<bool> DeleteAsync(int id);
 
         IEnumerable<SelectListItem> GetSelectListOf_ScreenType();
+        IEnumerable<SelectListItem> GetSelectListOf_Screens();
     }
 }

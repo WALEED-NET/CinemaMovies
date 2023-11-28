@@ -12,7 +12,10 @@ builder.Services.AddScoped<IGenresService, GenresService>();  // inject IGenresS
 builder.Services.AddScoped<IMovieService, MovieService>();  // inject IMovieServices.
 builder.Services.AddScoped<ILocationService, LocationService>();  // inject ILocationServices.
 builder.Services.AddScoped<ICinemaService, CinemaService>();  // inject ICinemaServices.
-builder.Services.AddScoped<IScreenService, ScreenService>();  
+builder.Services.AddScoped<IScreenService, ScreenService>();
+builder.Services.AddScoped<IShowTimeService, ShowTimeService>();
+
+builder.Services.AddAutoMapper(typeof(Program));    // add AutoMapper.
 
 builder.Services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation(); // I Add this For Speed The  changes in your views immediately without rebuilding the project.

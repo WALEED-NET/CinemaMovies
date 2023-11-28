@@ -1,4 +1,5 @@
-﻿namespace Cinema_Hope.Services
+﻿
+namespace Cinema_Hope.Services
 {
     public class MovieService : IMovieService
     {
@@ -150,6 +151,18 @@
             await poster.CopyToAsync(stream);
 
             return posterNameInServer;
+        }
+
+        public IEnumerable<SelectListItem> GetSelectListOf_Movies()
+        {
+            return _context.Movies.Select(m => new SelectListItem
+            {
+                Text = m.Title,
+                Value = m.MovieId.ToString()
+
+            }).OrderBy(s => s.Text)
+              .AsNoTracking()
+              .ToList();
         }
     }
 }
