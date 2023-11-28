@@ -26,7 +26,6 @@ namespace Cinema_Hope.Controllers
             _movieService = movieService;
             _mapper = mapper;
         }
-
         // GET: ShowTimes
         public async Task<IActionResult> Index()
         {
@@ -138,48 +137,13 @@ namespace Cinema_Hope.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: ShowTimes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null || _context.ShowTimes == null)
-            {
-                return NotFound();
-            }
+            bool isDeleted = await _showTimeService.DeleteAsync(id);
 
-            var showTime = await _context.ShowTimes
-                .Include(s => s.Movie)
-                .Include(s => s.Screen)
-                .FirstOrDefaultAsync(m => m.ShowTimeId == id);
-            if (showTime == null)
-            {
-                return NotFound();
-            }
+            return isDeleted ? Ok() : BadRequest("Bad Request");
 
-            return View(showTime);
-        }
-
-        // POST: ShowTimes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.ShowTimes == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.ShowTimes'  is null.");
-            }
-            var showTime = await _context.ShowTimes.FindAsync(id);
-            if (showTime != null)
-            {
-                _context.ShowTimes.Remove(showTime);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool ShowTimeExists(int id)
-        {
-          return (_context.ShowTimes?.Any(e => e.ShowTimeId == id)).GetValueOrDefault();
         }
     }
 }
