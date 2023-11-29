@@ -8,12 +8,13 @@ var connectionString = builder.Configuration.GetConnectionString("DefualtConnect
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString)); // Register DbContext 
 
-builder.Services.AddScoped<IGenresService, GenresService>();  // inject IGenresServices.
-builder.Services.AddScoped<IMovieService, MovieService>();  // inject IMovieServices.
+builder.Services.AddScoped<IGenresService, GenresService>();         // inject IGenresServices.
+builder.Services.AddScoped<IMovieService, MovieService>();          // inject IMovieServices.
 builder.Services.AddScoped<ILocationService, LocationService>();  // inject ILocationServices.
-builder.Services.AddScoped<ICinemaService, CinemaService>();  // inject ICinemaServices.
+builder.Services.AddScoped<ICinemaService, CinemaService>();     // inject ICinemaServices.
 builder.Services.AddScoped<IScreenService, ScreenService>();
 builder.Services.AddScoped<IShowTimeService, ShowTimeService>();
+builder.Services.AddScoped<ISeatService, SeatService>();
 
 builder.Services.AddAutoMapper(typeof(Program));    // add AutoMapper.
 

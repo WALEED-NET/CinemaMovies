@@ -33,7 +33,7 @@ namespace Cinema_Hope.Services
 
         public async Task Create(ShowTime_ViewModel model)
         {
-            // create entity model 
+            // create entity model  Then Map Values here from viewModel To Entity_ToDB
             ShowTime showTimeToDB =  _mapper.Map<ShowTime>(model);
 
 
