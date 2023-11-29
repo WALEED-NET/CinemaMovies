@@ -15,6 +15,7 @@ builder.Services.AddScoped<ICinemaService, CinemaService>();     // inject ICine
 builder.Services.AddScoped<IScreenService, ScreenService>();
 builder.Services.AddScoped<IShowTimeService, ShowTimeService>();
 builder.Services.AddScoped<ISeatService, SeatService>();
+builder.Services.AddScoped<IBookingService, BookingService>();
 
 builder.Services.AddAutoMapper(typeof(Program));    // add AutoMapper.
 

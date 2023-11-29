@@ -10,5 +10,6 @@
         Task<bool> DeleteAsync(int id);
 
         IEnumerable<SelectListItem> GetSelectListOf_ShowTimeStatus();
+        IEnumerable<SelectListItem> GetSelectListOf_ShowTimes();
     }
 }

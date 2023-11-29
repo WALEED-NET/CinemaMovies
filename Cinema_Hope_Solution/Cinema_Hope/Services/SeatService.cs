@@ -1,4 +1,5 @@
 ﻿
+
 namespace Cinema_Hope.Services
 {
     public class SeatService : ISeatService
@@ -82,6 +83,9 @@ namespace Cinema_Hope.Services
             return isDeleted;
         }
 
-        
+        public IEnumerable<SelectListItem> GetSelectListOfSeats()
+        {
+            return _context.Seats.ToList().Select(se => new SelectListItem { Value = se.SeatId.ToString(), Text = $"seat number :{se.SeatNumber} - seat Row Number : {se.RowNumber} " });
+        }
     }
 }

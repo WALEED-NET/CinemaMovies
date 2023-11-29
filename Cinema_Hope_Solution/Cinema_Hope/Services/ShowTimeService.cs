@@ -145,5 +145,14 @@ namespace Cinema_Hope.Services
                            }).ToList();
 
         }
+
+        public IEnumerable<SelectListItem> GetSelectListOf_ShowTimes()
+        {
+            return _context.ShowTimes.Include(sh => sh.Movie)
+                                     .Include(sh => sh.Screen).ThenInclude( sc => sc.Cinema)
+                                    .ToList()
+                                    .Select(sh => new SelectListItem
+                                    { Value = sh.ShowTimeId.ToString(), Text = $"{sh.Screen.Cinema.Name} - {sh.Screen.ScreenNumber} - {sh.Screen.ScreenType} - {sh.Movie.Title} " });
+        }
     }
 }

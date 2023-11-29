@@ -8,5 +8,7 @@
         Task<Seat?> Edit(SeatFrom_ViewModel model);
 
         Task<bool> DeleteAsync(int id);
+
+        IEnumerable<SelectListItem> GetSelectListOfSeats();
     }
 }

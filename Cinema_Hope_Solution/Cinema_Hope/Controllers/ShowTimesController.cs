@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Cinema_Hope.Data;
-using Cinema_Hope.Models;
-
-namespace Cinema_Hope.Controllers
+﻿namespace Cinema_Hope.Controllers
 {
     public class ShowTimesController : Controller
     {

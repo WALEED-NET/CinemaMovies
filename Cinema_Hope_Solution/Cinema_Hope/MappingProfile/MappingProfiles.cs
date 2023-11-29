@@ -11,6 +11,10 @@
 
             //========= Seat Mapping ===============
             CreateMap<SeatFrom_ViewModel, Seat>().ReverseMap();
+
+            //========= Booking Mapping ===============
+            CreateMap<Booking_ViewModel, Booking>().ReverseMap();
+
         }
     }
 }
