@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cinema_Hope | @ViewData["Title"] </title>
 
-    <!-- <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />  replaced with this under -->
+    <!-- <link rel="stylesheet" href="~/AdminStyle/lib/bootstrap/dist/css/bootstrap.min.css" />  replaced with this under -->
 
-    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/AdminStyle/css/bootstrap.min.css" />
 
     <!--Bootstrap Icons -->
-    <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="~/AdminStyle/lib/bootstrap-icons/font/bootstrap-icons.min.css" />
 
 
     <!-- Fonts -->
@@ -22,14 +22,14 @@
         rel="stylesheet">
 
     <!-- File Of Styling Selectlist -->
-    <link rel="stylesheet" href="~/lib/select2/css/select2.min.css" />
+    <link rel="stylesheet" href="~/AdminStyle/lib/select2/css/select2.min.css" />
 
     <!-- Sweet Alert -->
-    <link rel="stylesheet" href="~/lib/sweetalert2/sweetalert2.min.css" />
+    <link rel="stylesheet" href="~/AdminStyle/lib/sweetalert2/sweetalert2.min.css" />
 
     <!-- This File Site.css Always Should be tha last bottom -->
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Cinema_Hope.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/AdminStyle/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/AdminStyle/Cinema_Hope.styles.css" asp-append-version="true" />
 </head>
 
 <body>
@@ -58,6 +58,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="ShowTimes" asp-action="Index">ShowTimes</a>
                         </li>
+                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="UserArea" asp-controller="Home" asp-action="Index">UserArea</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -74,16 +77,16 @@
             &copy; 2023 - Cinema_Hope - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/AdminStyle/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/AdminStyle/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- File Of Styling Selectlist -->
-    <script src="~/lib/select2/js/select2.min.js"></script>
+    <script src="~/AdminStyle/lib/select2/js/select2.min.js"></script>
 
     <!-- Sweet Alert -->
-    <script src="~/lib/sweetalert2/sweetalert2.min.js" asp-append-version="true"></script>
+    <script src="~/AdminStyle/lib/sweetalert2/sweetalert2.min.js" asp-append-version="true"></script>
 
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/AdminStyle/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 

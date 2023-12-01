@@ -7,13 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\js\filesize-validator.js" />
-    <Content Remove="wwwroot\js\movies-index.js" />
+    <Content Remove="wwwroot\AdminStyle\js\filesize-validator.js" />
+    <Content Remove="wwwroot\AdminStyle\js\movies-index.js" />
   </ItemGroup>
 
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="wwwroot\js\filesize-validator.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\movies-index.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\AdminStyle\js\filesize-validator.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\AdminStyle\js\movies-index.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,12 +33,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\assets\images\movies\" />
+    <None Include="wwwroot\AdminStyle\js\filesize-validator.js" />
+    <None Include="wwwroot\AdminStyle\js\movies-index.js" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\js\filesize-validator.js" />
-    <None Include="wwwroot\js\movies-index.js" />
+    <Folder Include="Areas\UserArea\Data\" />
+    <Folder Include="Areas\UserArea\Models\" />
   </ItemGroup>
 
 </Project>

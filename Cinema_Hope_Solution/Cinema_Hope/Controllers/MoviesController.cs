@@ -122,5 +122,13 @@
 
             return isDeleted ? Ok() : BadRequest() ;
         }
+
+
+        public IActionResult AllMovies()
+        {
+            //IEnumerable<Movie> movies = _movieService.GetAll();
+            return View();
+        }
+
     }
 }
