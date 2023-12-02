@@ -4,6 +4,9 @@
     {
         public int BookingId { get; set; }
 
+        [Display(Name = "اسم السينماء")]
+        public int CinemaId { get; set; } // Foreign key
+
         [Display(Name = "العرض")]
         public int ShowtimeId { get; set; } // Foreign key
 
@@ -20,6 +23,7 @@
         [Display(Name = "حالة الحجز")]
         public BookingStatus Status { get; set; }
 
+        public IEnumerable<SelectListItem> SelectLisOfCinemas = Enumerable.Empty<SelectListItem>();       // for View this Is SelectMenu DropDown
         public IEnumerable<SelectListItem> SelectLisOfShowTimes = Enumerable.Empty<SelectListItem>();       // for View this Is SelectMenu DropDown
         public IEnumerable<SelectListItem> SelectLisOfSeats = Enumerable.Empty<SelectListItem>();            // for View this Is SelectMenu DropDown
         public IEnumerable<SelectListItem> SelectLisOfCustomers = Enumerable.Empty<SelectListItem>();       // for View this Is SelectMenu DropDown

@@ -5,13 +5,15 @@
         private readonly ApplicationDbContext _context;
         private readonly ILocationService _locationService; // Service
         private readonly ICinemaService _cinemaService; // Service
+        private readonly IMapper _mapper; // Service
 
 
-        public CinemasController(ApplicationDbContext context, ILocationService locationService, ICinemaService cinemaService)
+        public CinemasController(ApplicationDbContext context, ILocationService locationService, ICinemaService cinemaService, IMapper mapper)
         {
             _context = context;
             _locationService = locationService;
             _cinemaService = cinemaService;
+            _mapper = mapper;
         }
 
         // GET: Cinemas
@@ -119,5 +121,17 @@
 
             return isDeleted ? Ok() : BadRequest("Bad Requist");
         }
+
+        //======= api
+        [HttpGet]
+        public async Task<IActionResult> AllCinemas()
+        {
+            IEnumerable<Cinema> cinemas = await _cinemaService.GetAllAsync();
+
+            IEnumerable<CinemaDto> cinemasDto = _mapper.Map<IEnumerable<CinemaDto>>(cinemas);
+
+            return Ok(cinemasDto);
+        }
+
     }
 }

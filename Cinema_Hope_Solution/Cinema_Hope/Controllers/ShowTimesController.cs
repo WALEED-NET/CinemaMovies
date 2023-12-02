@@ -54,8 +54,6 @@
 
 
         // POST: ShowTimes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ShowTime_ViewModel model)
@@ -134,6 +132,15 @@
 
             return isDeleted ? Ok() : BadRequest("Bad Request");
 
+        }
+
+        //======= api
+        [HttpGet]
+        public  IActionResult GetListOfShowTimesByCinemaId(int cinemaId)
+        {
+            var showTimesByCinemaId = _showTimeService.GetSelectListOf_ShowTimesByCinemaId(cinemaId);
+
+            return Ok(showTimesByCinemaId);
         }
     }
 }

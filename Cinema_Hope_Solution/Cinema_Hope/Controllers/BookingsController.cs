@@ -6,15 +6,17 @@
         private readonly IBookingService _bookingService;
         private readonly IShowTimeService _showTimeService;
         private readonly ISeatService _seatService;
+        private readonly ICinemaService _cinemaService;
         private readonly IMapper _mapper;
 
-        public BookingsController(ApplicationDbContext context, IBookingService bookingService, IShowTimeService showTimeService, ISeatService seatService, IMapper mapper)
+        public BookingsController(ApplicationDbContext context, IBookingService bookingService, IShowTimeService showTimeService, ISeatService seatService, IMapper mapper, ICinemaService cinemaService)
         {
             _context = context;
             _bookingService = bookingService;
             _showTimeService = showTimeService;
             _seatService = seatService;
             _mapper = mapper;
+            _cinemaService = cinemaService;
         }
 
         public async Task<IActionResult> Index()
@@ -40,15 +42,12 @@
         {
             Booking_ViewModel viewModel = new Booking_ViewModel()
             {
+                SelectLisOfCinemas = _cinemaService.GetSelectListOf_Cinemas(),
                 SelectLisOfShowTimes = _showTimeService.GetSelectListOf_ShowTimes(),
                 SelectLisOfSeats = _seatService.GetSelectListOfSeats(),
                 SelectLisOfCustomers = _bookingService.GetSelectListOf_Customers(),
                 SelectLisOfBookingStatus = _bookingService.GetSelectListOf_BookingStatus()
             };
-
-            //ViewData["CustomerId"] = new SelectList(_context.Customers, "CustomerId", "CustomerId");
-            //ViewData["SeatId"] = new SelectList(_context.Seats, "SeatId", "SeatId");
-            //ViewData["ShowtimeId"] = new SelectList(_context.ShowTimes, "ShowTimeId", "ShowTimeId");
 
             return View(viewModel);
         }
@@ -62,6 +61,7 @@
             {
                 // after that model is not vaild remember to initialize nessury field of model before return it.
 
+                model.SelectLisOfCinemas = _cinemaService.GetSelectListOf_Cinemas();
                 model.SelectLisOfShowTimes = _showTimeService.GetSelectListOf_ShowTimes();
                 model.SelectLisOfSeats =  _seatService.GetSelectListOfSeats();
                 model.SelectLisOfCustomers = _bookingService.GetSelectListOf_Customers();

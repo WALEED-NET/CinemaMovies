@@ -15,6 +15,9 @@
             //========= Booking Mapping ===============
             CreateMap<Booking_ViewModel, Booking>().ReverseMap();
 
+
+            //========= Cinema Mapping ===============
+            CreateMap<Cinema , CinemaDto>().ReverseMap();
         }
     }
 }

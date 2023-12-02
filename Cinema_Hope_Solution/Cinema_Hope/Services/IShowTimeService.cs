@@ -11,5 +11,6 @@
 
         IEnumerable<SelectListItem> GetSelectListOf_ShowTimeStatus();
         IEnumerable<SelectListItem> GetSelectListOf_ShowTimes();
+        IEnumerable<SelectListItem> GetSelectListOf_ShowTimesByCinemaId(int cinemaId);
     }
 }
