@@ -12,6 +12,7 @@ global using Cinema_Hope.Services;
 global using Cinema_Hope.Settings;
 global using Cinema_Hope.Attributes;
 global using AutoMapper;
+global using Cinema_Hope.Dtos;
 
 
 

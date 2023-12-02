@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Cinema_Hope.Data;
-using Cinema_Hope.Models;
-
-namespace Cinema_Hope.Controllers
+﻿namespace Cinema_Hope.Controllers
 {
     public class ShowTimesController : Controller
     {
@@ -64,8 +54,6 @@ namespace Cinema_Hope.Controllers
 
 
         // POST: ShowTimes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ShowTime_ViewModel model)
@@ -144,6 +132,15 @@ namespace Cinema_Hope.Controllers
 
             return isDeleted ? Ok() : BadRequest("Bad Request");
 
+        }
+
+        //======= api
+        [HttpGet]
+        public  IActionResult GetListOfShowTimesByCinemaId(int cinemaId)
+        {
+            var showTimesByCinemaId = _showTimeService.GetSelectListOf_ShowTimesByCinemaId(cinemaId);
+
+            return Ok(showTimesByCinemaId);
         }
     }
 }

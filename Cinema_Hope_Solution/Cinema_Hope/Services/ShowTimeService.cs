@@ -33,7 +33,7 @@ namespace Cinema_Hope.Services
 
         public async Task Create(ShowTime_ViewModel model)
         {
-            // create entity model 
+            // create entity model  Then Map Values here from viewModel To Entity_ToDB
             ShowTime showTimeToDB =  _mapper.Map<ShowTime>(model);
 
 
@@ -143,6 +143,26 @@ namespace Cinema_Hope.Services
                                Text = v.ToString(),
                                Value = v.ToString() // Store the string representation of the enum
                            }).ToList();
+
+        }
+
+        public IEnumerable<SelectListItem> GetSelectListOf_ShowTimes()
+        {
+            return _context.ShowTimes.Include(sh => sh.Movie)
+                                     .Include(sh => sh.Screen).ThenInclude( sc => sc.Cinema)
+                                    .ToList()
+                                    .Select(sh => new SelectListItem
+                                    { Value = sh.ShowTimeId.ToString(), Text = $"{sh.Screen.Cinema.Name} - {sh.Screen.ScreenNumber} - {sh.Screen.ScreenType} - {sh.Movie.Title} " });
+        }
+
+        public IEnumerable<SelectListItem> GetSelectListOf_ShowTimesByCinemaId(int cinemaId)
+        {
+            return _context.ShowTimes.Include(sh => sh.Movie)
+                                    .Include(sh => sh.Screen).ThenInclude(sc => sc.Cinema).Where(sh => sh.Screen!.ScreenId == cinemaId)
+                                   .ToList()
+                                   .Select(sh => new SelectListItem
+                                   { Value = sh.ShowTimeId.ToString(), Text = $"{sh.Screen.Cinema.Name} - {sh.Screen.ScreenNumber} - {sh.Screen.ScreenType} - {sh.Movie.Title} " });
+
 
         }
     }

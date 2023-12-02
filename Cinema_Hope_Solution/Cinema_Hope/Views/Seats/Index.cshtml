@@ -1,36 +1,32 @@
-﻿@model IEnumerable<Cinema_Hope.Models.ShowTime>
+﻿@model IEnumerable<Cinema_Hope.Models.Seat>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>صفحة العروض</h1>
+<h1>صفحة المقاعد</h1>
 
 <a class="btn btn-secondary btn-lg" asp-action="Create">
     <i class="bi bi-plus-circle-dotted"></i>
-    اضافة عرض جديد
+    اضافة مقعد جديد
 </a>
-<table class="table">
+<table class="table table-striped table-hover table-bordered">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.StartTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TicketPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movie)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Screen)
             </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.SeatNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RowNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsBookedUp)
+            </th>
+
             <th></th>
         </tr>
     </thead>
@@ -39,27 +35,23 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.StartTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TicketPrice)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Movie.Title)
-                </td>
-                <td>
                     @item.Screen.Cinema.Name - الشاشه رقم @item.Screen.ScreenNumber
                 </td>
                 <td>
-                    <a class="btn btn-info rounded rounded-3 me-2" asp-action="Edit" asp-route-id="@item.ShowTimeId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ShowTimeId">Details</a> |
-                    <a class="btn btn-danger rounded rounded-3 js-delete" data-id="@item.ShowTimeId">
+                    @Html.DisplayFor(modelItem => item.SeatNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RowNumber)
+                </td>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsBookedUp)
+                </td>
+
+                <td>
+                    <a class="btn btn-info rounded rounded-3 me-2"  asp-action="Edit" asp-route-id="@item.SeatId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.SeatId">Details</a> |
+                    <a class="btn btn-danger rounded rounded-3 js-delete" data-id="@item.SeatId">
                         <i class="bi bi-trash3"></i>
                     </a>
                 </td>
@@ -67,11 +59,6 @@
         }
     </tbody>
 </table>
-
-
-
-
-
 
 @section Scripts {
     <script>
@@ -88,7 +75,7 @@
                     buttonsStyling: false
                 });
                 swal.fire({
-                    title: 'Are you sure that you need to delete this ShowTime?',
+                    title: 'Are you sure that you need to delete this Seat?',
                     text: "You won't be able to revert this!",
                     icon: 'warning',
                     showCancelButton: true,
@@ -98,12 +85,12 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: `/ShowTimes/Delete/${btn.data('id')}`,
+                            url: `/Seats/Delete/${btn.data('id')}`,
                             method: 'DELETE',
                             success: function () {
                                 swal.fire(
                                     'Deleted!',
-                                    'ShowTime has been deleted.',
+                                    'Seat has been deleted.',
                                     'success'
                                 );
                                 btn.parents('tr').fadeOut();

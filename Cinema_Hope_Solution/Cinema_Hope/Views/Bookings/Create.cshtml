@@ -1,0 +1,105 @@
+﻿@model Booking_ViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Booking</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CinemaId" class="control-label"></label>
+                <select asp-for="CinemaId" class="form-control" asp-items="@Model.SelectLisOfCinemas"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShowtimeId" class="control-label"></label>
+                <select asp-for="ShowtimeId" class="form-control" asp-items="@Model.SelectLisOfShowTimes"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SeatId" class="control-label"></label>
+                <select asp-for="SeatId" class="form-control" asp-items="@Model.SelectLisOfSeats"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerId" class="control-label"></label>
+                <select asp-for="CustomerId" class="form-control" asp-items="@Model.SelectLisOfCustomers"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookingDate" class="control-label"></label>
+                <input asp-for="BookingDate" class="form-control" />
+                <span asp-validation-for="BookingDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <select asp-for="Status" class="form-control" asp-items="@Model.SelectLisOfBookingStatus"></select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+
+    // هذا الكود يعمل في واجهه اضافه خلطه جديده عند تحديد نوع المنتج يقوم مباشره بجلب الوحده الخاصه بنوع المنتج
+    $(document).ready(function () {
+        // Get a reference to the product select element
+        var productSelect = $('#CinemaId');
+
+        // Define a function to fetch and set the unit name
+        var fetchAndSetUnitName = function () {
+            console.log("starting function of Fetching Unit Select Drop Dwon.")
+            // Get a reference to the product select element
+            var productSelect = $('#CinemaId');
+
+            // Add an event listener for the change event on the product select
+            productSelect.on('change', function () {
+                // Get the selected product value
+                var selectedProductId = $(this).val();
+                console.log("You clicked Product Select List")
+
+                // Make an AJAX request to fetch the unit name based on the selected product
+                $.ajax({
+                    url: '/ShowTimes/GetListOfShowTimesByCinemaId/' + selectedProductId,  // Replace with the actual URL to fetch the unit name
+                    method: 'GET',
+                    data: {
+                        cinemaId: selectedProductId
+                    },
+                    success: function (response) {
+                        // Update the unit input value with the fetched unit name
+                        $('#UnitId').val(response.value);
+                    },
+                    error: function () {
+                        // Handle the error case
+                        console.log('Failed to fetch unit Id.');
+                    }
+                });
+            });
+        };
+
+        // Fetch and set the unit name when the page loads
+        fetchAndSetUnitName();
+
+        // Fetch and set the unit name when the product select element changes
+        productSelect.on('change', fetchAndSetUnitName);
+
+    });
+
+</script>
+
+}
