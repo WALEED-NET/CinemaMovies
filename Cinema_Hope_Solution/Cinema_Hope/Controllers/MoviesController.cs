@@ -5,12 +5,16 @@
         private readonly ApplicationDbContext _context;
         private readonly IGenresService _genresServices;   // Services
         private readonly IMovieService  _movieService;   // Services
+        private readonly IScreenService  _screenService;   // Services
+        private readonly ICinemaService  _cinemaService;   // Services
 
-        public MoviesController(ApplicationDbContext context, IGenresService genresServices, IMovieService movieService)
+        public MoviesController(ApplicationDbContext context, IGenresService genresServices, IMovieService movieService, IScreenService screenService, ICinemaService cinemaService)
         {
             _context = context;
             _genresServices = genresServices;
             _movieService = movieService;
+            this._screenService = screenService;
+            _cinemaService = cinemaService;
         }
 
         public IActionResult Index()
@@ -126,8 +130,15 @@
 
         public IActionResult AllMovies()
         {
-            //IEnumerable<Movie> movies = _movieService.GetAll();
-            return View();
+            MoviesPage_ViewModel viewModel = new MoviesPage_ViewModel()
+            {
+                Movies = _movieService.GetAll(),
+                Screens = _screenService.GetSelectListOf_Screens(),
+                Cinemas = _cinemaService.GetSelectListOf_Cinemas(),
+                Genres = _genresServices.GetSelectListOf_Genres()
+            };
+
+            return View(viewModel);
         }
 
     }

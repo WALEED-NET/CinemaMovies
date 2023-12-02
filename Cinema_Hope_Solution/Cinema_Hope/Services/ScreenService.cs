@@ -112,7 +112,7 @@ namespace Cinema_Hope.Services
                 .ToList() // Fetch data into memory
                 .Select(s => new SelectListItem
                 {
-                    Text = $"{s.Cinema.Name} screen number : {s.ScreenNumber} ",
+                    Text = $"الشاشة رقم: {s.ScreenNumber} - {s.ScreenType}",
                     Value = s.ScreenId.ToString()
 
                 }).OrderBy(s => s.Text);

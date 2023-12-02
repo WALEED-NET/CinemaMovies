@@ -1,4 +1,5 @@
-﻿@{
+﻿@model MoviesPage_ViewModel
+@{
 
 }
 <link rel="stylesheet" href="~/style.css" />
@@ -36,11 +37,15 @@
             </div>
             <h3>kind</h3>
             <ul class="list">
-                <li><input type="checkbox" name="" id="1"> <label for="1">Action</label></li>
-                <li><input type="checkbox" name="" id="2"> <label for="2">Horror</label></li>
+                @foreach (var genre in Model.Genres)
+                {
+                    <li><input type="checkbox" name="@genre.Text" id="@genre.Value"> <label
+                            for="@genre.Value">@genre.Text</label></li>
+                }
+                @* <li><input type="checkbox" name="" id="2"> <label for="2">Horror</label></li>
                 <li><input type="checkbox" name="" id="3"> <label for="3"> comedic</label></li>
                 <li><input type="checkbox" name="" id="4"> <label for="4">Romantic</label></li>
-                <li><input type="checkbox" name="" id="5"> <label for="5">Excitement</label></li>
+                <li><input type="checkbox" name="" id="5"> <label for="5">Excitement</label></li> *@
             </ul>
             <!-- <h3>اللون</h3>
                 <div class="color">
@@ -50,11 +55,24 @@
                     <input type="checkbox" name="" id="" class="red">
                     <input type="checkbox" name="" id="" class="white">
                 </div> -->
+            <h3>Cinemas</h3>
+            <ul class="list">
+                @foreach (var cinema in Model.Cinemas)
+                {
+                    <li><input type="checkbox" name="@cinema.Text" id="@cinema.Value"> <label
+                            for="@cinema.Value">@cinema.Text</label></li>
+                }
+            </ul>
             <h3>Screen</h3>
             <ul class="list">
-                <li><input type="checkbox" name="" id="1"> <label for="1">Great Hall</label></li>
+                @foreach (var screen in Model.Screens)
+                {
+                    <li><input type="checkbox" name="@screen.Text" id="@screen.Value"> <label
+                            for="@screen.Value">@screen.Text</label></li>
+                }
+                @* <li><input type="checkbox" name="" id="1"> <label for="1">Great Hall</label></li>
                 <li><input type="checkbox" name="" id="2"> <label for="2">Intermediate Hall</label></li>
-                <li><input type="checkbox" name="" id="3"> <label for="3">Sub Hall</label></li>
+                <li><input type="checkbox" name="" id="3"> <label for="3">Sub Hall</label></li> *@
             </ul>
             <!-- <h3>المناسبة</h3>
                 <ul class="list">
@@ -65,394 +83,55 @@
                 </ul> -->
         </div>
         <div class="products grid" dir="">
+            @foreach (var movie in Model.Movies)
+            {
+                <li class="slide-item">
+                    <div class="block-~/images position-relative">
+                        <div class="img-box">
+                            <img src="~/images/favorite/f1.jpg" alt="@movie.Title" class="img-fluid" />
+                        </div>
+                        <div class="block-description">
+                            <h6 class="iq-title">
+                                <a href="#"> @movie.Title </a>
+                            </h6>
+                            <div class="movie-time d-flex align-items-center my-2">
+                                <div class="badge badge-secondary p-1 mr-2">16+</div>
+                                <span class="text-white">@movie.Duration دقيقه</span>
+                                <br>
+                                <span class="text-white">@movie.Genre.Name</span>
+                            </div>
+                            <div class="hover-buttons">
+                                <span class="btn btn-hover iq-button">
+                                    <i class="fa fa-play mr-1"></i>
+                                    Play Now
+                                </span>
+                            </div>
+                        </div>
+                        <div class="block-social-info">
+                            <ul class="list-inline p-0 m-0 music-play-lists">
+                                <li class="share">
+                                    <span><i class="fa fa-share-alt"></i></span>
+                                    <div class="share-box">
+                                        <div class="d-flex align-items-center">
+                                            <a href="#" class="share-ico"><i class="fa fa-share-alt"></i></a>
+                                            <a href="#" class="share-ico"><i class="fa fa-youtube"></i></a>
+                                            <a href="#" class="share-ico"><i class="fa fa-instagram"></i></a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span><i class="fa fa-heart"></i></span>
+                                    <span class="count-box">19+</span>
+                                </li>
+                                <li>
+                                    <span><i class="fa fa-plus"></i></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            }
 
-            <li class="slide-item">
-                <div class="block-~/images position-relative">
-                    <div class="img-box">
-                        <img src="~/images/favorite/f1.jpg" class="img-fluid" alt="" />
-                    </div>
-                    <div class="block-description">
-                        <h6 class="iq-title">
-                            <a href="#"> Insidious </a>
-                        </h6>
-                        <div class="movie-time d-flex align-items-center my-2">
-                            <div class="badge badge-secondary p-1 mr-2">16+</div>
-                            <span class="text-white">1h 43min</span>
-                        </div>
-                        <div class="hover-buttons">
-                            <span class="btn btn-hover iq-button">
-                                <i class="fa fa-play mr-1"></i>
-                                Play Now
-                            </span>
-                        </div>
-                    </div>
-                    <div class="block-social-info">
-                        <ul class="list-inline p-0 m-0 music-play-lists">
-                            <li class="share">
-                                <span><i class="fa fa-share-alt"></i></span>
-                                <div class="share-box">
-                                    <div class="d-flex align-items-center">
-                                        <a href="#" class="share-ico"><i class="fa fa-share-alt"></i></a>
-                                        <a href="#" class="share-ico"><i class="fa fa-youtube"></i></a>
-                                        <a href="#" class="share-ico"><i class="fa fa-instagram"></i></a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <span><i class="fa fa-heart"></i></span>
-                                <span class="count-box">19+</span>
-                            </li>
-                            <li>
-                                <span><i class="fa fa-plus"></i></span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
-            <li class="slide-item">
-                <div class="block-~/images position-relative">
-                    <div class="img-box">
-                        <img src="~/images/favorite/f1.jpg" class="img-fluid" alt="" />
-                    </div>
-                    <div class="block-description">
-                        <h6 class="iq-title">
-                            <a href="#"> Insidious </a>
-                        </h6>
-                        <div class="movie-time d-flex align-items-center my-2">
-                            <div class="badge badge-secondary p-1 mr-2">16+</div>
-                            <span class="text-white">1h 43min</span>
-                        </div>
-                        <div class="hover-buttons">
-                            <span class="btn btn-hover iq-button">
-                                <i class="fa fa-play mr-1"></i>
-                                Play Now
-                            </span>
-                        </div>
-                    </div>
-                    <div class="block-social-info">
-                        <ul class="list-inline p-0 m-0 music-play-lists">
-                            <li class="share">
-                                <span><i class="fa fa-share-alt"></i></span>
-                                <div class="share-box">
-                                    <div class="d-flex align-items-center">
-                                        <a href="#" class="share-ico"><i class="fa fa-share-alt"></i></a>
-                                        <a href="#" class="share-ico"><i class="fa fa-youtube"></i></a>
-                                        <a href="#" class="share-ico"><i class="fa fa-instagram"></i></a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <span><i class="fa fa-heart"></i></span>
-                                <span class="count-box">19+</span>
-                            </li>
-                            <li>
-                                <span><i class="fa fa-plus"></i></span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
-            <li class="slide-item">
-                <div class="block-~/images position-relative">
-                    <div class="img-box">
-                        <img src="~/images/favorite/f1.jpg" class="img-fluid" alt="" />
-                    </div>
-                    <div class="block-description">
-                        <h6 class="iq-title">
-                            <a href="#"> Insidious </a>
-                        </h6>
-                        <div class="movie-time d-flex align-items-center my-2">
-                            <div class="badge badge-secondary p-1 mr-2">16+</div>
-                            <span class="text-white">1h 43min</span>
-                        </div>
-                        <div class="hover-buttons">
-                            <span class="btn btn-hover iq-button">
-                                <i class="fa fa-play mr-1"></i>
-                                Play Now
-                            </span>
-                        </div>
-                    </div>
-                    <div class="block-social-info">
-                        <ul class="list-inline p-0 m-0 music-play-lists">
-                            <li class="share">
-                                <span><i class="fa fa-share-alt"></i></span>
-                                <div class="share-box">
-                                    <div class="d-flex align-items-center">
-                                        <a href="#" class="share-ico"><i class="fa fa-share-alt"></i></a>
-                                        <a href="#" class="share-ico"><i class="fa fa-youtube"></i></a>
-                                        <a href="#" class="share-ico"><i class="fa fa-instagram"></i></a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <span><i class="fa fa-heart"></i></span>
-                                <span class="count-box">19+</span>
-                            </li>
-                            <li>
-                                <span><i class="fa fa-plus"></i></span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
-            <li class="slide-item">
-                <div class="block-~/images position-relative">
-                    <div class="img-box">
-                        <img src="~/images/favorite/f1.jpg" class="img-fluid" alt="" />
-                    </div>
-                    <div class="block-description">
-                        <h6 class="iq-title">
-                            <a href="#"> Insidious </a>
-                        </h6>
-                        <div class="movie-time d-flex align-items-center my-2">
-                            <div class="badge badge-secondary p-1 mr-2">16+</div>
-                            <span class="text-white">1h 43min</span>
-                        </div>
-                        <div class="hover-buttons">
-                            <span class="btn btn-hover iq-button">
-                                <i class="fa fa-play mr-1"></i>
-                                Play Now
-                            </span>
-                        </div>
-                    </div>
-                    <div class="block-social-info">
-                        <ul class="list-inline p-0 m-0 music-play-lists">
-                            <li class="share">
-                                <span><i class="fa fa-share-alt"></i></span>
-                                <div class="share-box">
-                                    <div class="d-flex align-items-center">
-                                        <a href="#" class="share-ico"><i class="fa fa-share-alt"></i></a>
-                                        <a href="#" class="share-ico"><i class="fa fa-youtube"></i></a>
-                                        <a href="#" class="share-ico"><i class="fa fa-instagram"></i></a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <span><i class="fa fa-heart"></i></span>
-                                <span class="count-box">19+</span>
-                            </li>
-                            <li>
-                                <span><i class="fa fa-plus"></i></span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
-            <li class="slide-item">
-                <div class="block-~/images position-relative">
-                    <div class="img-box">
-                        <img src="~/images/favorite/f1.jpg" class="img-fluid" alt="" />
-                    </div>
-                    <div class="block-description">
-                        <h6 class="iq-title">
-                            <a href="#"> Insidious </a>
-                        </h6>
-                        <div class="movie-time d-flex align-items-center my-2">
-                            <div class="badge badge-secondary p-1 mr-2">16+</div>
-                            <span class="text-white">1h 43min</span>
-                        </div>
-                        <div class="hover-buttons">
-                            <span class="btn btn-hover iq-button">
-                                <i class="fa fa-play mr-1"></i>
-                                Play Now
-                            </span>
-                        </div>
-                    </div>
-                    <div class="block-social-info">
-                        <ul class="list-inline p-0 m-0 music-play-lists">
-                            <li class="share">
-                                <span><i class="fa fa-share-alt"></i></span>
-                                <div class="share-box">
-                                    <div class="d-flex align-items-center">
-                                        <a href="#" class="share-ico"><i class="fa fa-share-alt"></i></a>
-                                        <a href="#" class="share-ico"><i class="fa fa-youtube"></i></a>
-                                        <a href="#" class="share-ico"><i class="fa fa-instagram"></i></a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <span><i class="fa fa-heart"></i></span>
-                                <span class="count-box">19+</span>
-                            </li>
-                            <li>
-                                <span><i class="fa fa-plus"></i></span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
-            <li class="slide-item">
-                <div class="block-~/images position-relative">
-                    <div class="img-box">
-                        <img src="~/images/favorite/f1.jpg" class="img-fluid" alt="" />
-                    </div>
-                    <div class="block-description">
-                        <h6 class="iq-title">
-                            <a href="#"> Insidious </a>
-                        </h6>
-                        <div class="movie-time d-flex align-items-center my-2">
-                            <div class="badge badge-secondary p-1 mr-2">16+</div>
-                            <span class="text-white">1h 43min</span>
-                        </div>
-                        <div class="hover-buttons">
-                            <span class="btn btn-hover iq-button">
-                                <i class="fa fa-play mr-1"></i>
-                                Play Now
-                            </span>
-                        </div>
-                    </div>
-                    <div class="block-social-info">
-                        <ul class="list-inline p-0 m-0 music-play-lists">
-                            <li class="share">
-                                <span><i class="fa fa-share-alt"></i></span>
-                                <div class="share-box">
-                                    <div class="d-flex align-items-center">
-                                        <a href="#" class="share-ico"><i class="fa fa-share-alt"></i></a>
-                                        <a href="#" class="share-ico"><i class="fa fa-youtube"></i></a>
-                                        <a href="#" class="share-ico"><i class="fa fa-instagram"></i></a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <span><i class="fa fa-heart"></i></span>
-                                <span class="count-box">19+</span>
-                            </li>
-                            <li>
-                                <span><i class="fa fa-plus"></i></span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
-            <li class="slide-item">
-                <div class="block-~/images position-relative">
-                    <div class="img-box">
-                        <img src="~/images/favorite/f1.jpg" class="img-fluid" alt="" />
-                    </div>
-                    <div class="block-description">
-                        <h6 class="iq-title">
-                            <a href="#"> Insidious </a>
-                        </h6>
-                        <div class="movie-time d-flex align-items-center my-2">
-                            <div class="badge badge-secondary p-1 mr-2">16+</div>
-                            <span class="text-white">1h 43min</span>
-                        </div>
-                        <div class="hover-buttons">
-                            <span class="btn btn-hover iq-button">
-                                <i class="fa fa-play mr-1"></i>
-                                Play Now
-                            </span>
-                        </div>
-                    </div>
-                    <div class="block-social-info">
-                        <ul class="list-inline p-0 m-0 music-play-lists">
-                            <li class="share">
-                                <span><i class="fa fa-share-alt"></i></span>
-                                <div class="share-box">
-                                    <div class="d-flex align-items-center">
-                                        <a href="#" class="share-ico"><i class="fa fa-share-alt"></i></a>
-                                        <a href="#" class="share-ico"><i class="fa fa-youtube"></i></a>
-                                        <a href="#" class="share-ico"><i class="fa fa-instagram"></i></a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <span><i class="fa fa-heart"></i></span>
-                                <span class="count-box">19+</span>
-                            </li>
-                            <li>
-                                <span><i class="fa fa-plus"></i></span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
-            <li class="slide-item">
-                <div class="block-~/images position-relative">
-                    <div class="img-box">
-                        <img src="~/images/favorite/f1.jpg" class="img-fluid" alt="" />
-                    </div>
-                    <div class="block-description">
-                        <h6 class="iq-title">
-                            <a href="#"> Insidious </a>
-                        </h6>
-                        <div class="movie-time d-flex align-items-center my-2">
-                            <div class="badge badge-secondary p-1 mr-2">16+</div>
-                            <span class="text-white">1h 43min</span>
-                        </div>
-                        <div class="hover-buttons">
-                            <span class="btn btn-hover iq-button">
-                                <i class="fa fa-play mr-1"></i>
-                                Play Now
-                            </span>
-                        </div>
-                    </div>
-                    <div class="block-social-info">
-                        <ul class="list-inline p-0 m-0 music-play-lists">
-                            <li class="share">
-                                <span><i class="fa fa-share-alt"></i></span>
-                                <div class="share-box">
-                                    <div class="d-flex align-items-center">
-                                        <a href="#" class="share-ico"><i class="fa fa-share-alt"></i></a>
-                                        <a href="#" class="share-ico"><i class="fa fa-youtube"></i></a>
-                                        <a href="#" class="share-ico"><i class="fa fa-instagram"></i></a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <span><i class="fa fa-heart"></i></span>
-                                <span class="count-box">19+</span>
-                            </li>
-                            <li>
-                                <span><i class="fa fa-plus"></i></span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
-            <li class="slide-item">
-                <div class="block-~/images position-relative">
-                    <div class="img-box">
-                        <img src="~/images/favorite/f1.jpg" class="img-fluid" alt="" />
-                    </div>
-                    <div class="block-description">
-                        <h6 class="iq-title">
-                            <a href="#"> Insidious </a>
-                        </h6>
-                        <div class="movie-time d-flex align-items-center my-2">
-                            <div class="badge badge-secondary p-1 mr-2">16+</div>
-                            <span class="text-white">1h 43min</span>
-                        </div>
-                        <div class="hover-buttons">
-                            <span class="btn btn-hover iq-button">
-                                <i class="fa fa-play mr-1"></i>
-                                Play Now
-                            </span>
-                        </div>
-                    </div>
-                    <div class="block-social-info">
-                        <ul class="list-inline p-0 m-0 music-play-lists">
-                            <li class="share">
-                                <span><i class="fa fa-share-alt"></i></span>
-                                <div class="share-box">
-                                    <div class="d-flex align-items-center">
-                                        <a href="#" class="share-ico"><i class="fa fa-share-alt"></i></a>
-                                        <a href="#" class="share-ico"><i class="fa fa-youtube"></i></a>
-                                        <a href="#" class="share-ico"><i class="fa fa-instagram"></i></a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <span><i class="fa fa-heart"></i></span>
-                                <span class="count-box">19+</span>
-                            </li>
-                            <li>
-                                <span><i class="fa fa-plus"></i></span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
         </div>
     </div>
 </div>
