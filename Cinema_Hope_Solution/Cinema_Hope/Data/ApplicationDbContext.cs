@@ -23,7 +23,14 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
         base.OnModelCreating(modelBuilder);
 
-
+        // Changing Names of Asp Tables
+        modelBuilder.Entity<IdentityUser>().ToTable("Users", "security");
+        modelBuilder.Entity<IdentityRole>().ToTable("Roles", "security");
+        modelBuilder.Entity<IdentityUserRole<string>>().ToTable("UserRoles", "security");
+        modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims", "security");
+        modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("UserLogins", "security");
+        modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("RoLeClaims", "security");
+        modelBuilder.Entity<IdentityUserToken<string>>().ToTable("UserTokens", "security");
 
         // Call Models Configurations here :
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(MovieConfiguration).Assembly);
