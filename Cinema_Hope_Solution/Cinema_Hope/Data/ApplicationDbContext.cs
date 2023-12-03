@@ -1,5 +1,8 @@
-﻿namespace Cinema_Hope.Data;
-public class ApplicationDbContext : DbContext
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
+namespace Cinema_Hope.Data;
+public class ApplicationDbContext : IdentityDbContext<IdentityUser>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options ) : base(options)
     {

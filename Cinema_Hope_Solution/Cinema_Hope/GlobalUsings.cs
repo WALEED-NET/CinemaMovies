@@ -13,7 +13,9 @@ global using Cinema_Hope.Settings;
 global using Cinema_Hope.Attributes;
 global using AutoMapper;
 global using Cinema_Hope.Dtos;
-
+global using Microsoft.AspNetCore.Identity;
+global using System;
+global using System.Text.Json.Serialization;
 
 
 
