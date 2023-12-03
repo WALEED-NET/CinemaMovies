@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using System.Linq;
 
 namespace Cinema_Hope.Controllers
 {
@@ -7,9 +8,9 @@ namespace Cinema_Hope.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IGenresService _genresServices;   // Services
-        private readonly IMovieService  _movieService;   // Services
-        private readonly IScreenService  _screenService;   // Services
-        private readonly ICinemaService  _cinemaService;   // Services
+        private readonly IMovieService _movieService;   // Services
+        private readonly IScreenService _screenService;   // Services
+        private readonly ICinemaService _cinemaService;   // Services
 
         public MoviesController(ApplicationDbContext context, IGenresService genresServices, IMovieService movieService, IScreenService screenService, ICinemaService cinemaService)
         {
@@ -129,15 +130,38 @@ namespace Cinema_Hope.Controllers
         {
             var isDeleted = _movieService.Delete(id);
 
-            return isDeleted ? Ok() : BadRequest() ;
+            return isDeleted ? Ok() : BadRequest();
         }
 
-        
-        public IActionResult AllMovies()
+
+        public IActionResult AllMovies(string sort, string display)
         {
+            // Get all the movies from the database
+            var movies = _movieService.GetAll();
+
+            // Apply sorting
+            switch (sort)
+            {
+                case "new":
+                    movies = movies.OrderByDescending(m => m.ReleaseDate);
+                    break;
+
+                case "old":
+                    movies = movies.OrderBy(m => m.ReleaseDate);
+                    break;
+
+            }
+
+            // Apply display order
+            if (display == "desc")
+            {
+                movies = movies.Reverse();
+            }
+
+            // Create the view model with the filtered and sorted movies
             MoviesPage_ViewModel viewModel = new MoviesPage_ViewModel()
             {
-                Movies = _movieService.GetAll(),
+                Movies = movies.ToList(),
                 Screens = _screenService.GetSelectListOf_Screens(),
                 Cinemas = _cinemaService.GetSelectListOf_Cinemas(),
                 Genres = _genresServices.GetSelectListOf_Genres()
@@ -146,5 +170,34 @@ namespace Cinema_Hope.Controllers
             return View(viewModel);
         }
 
+
+        public IActionResult Filter(string cinema, List<string> genres)
+        {
+            // Get all the movies from the database
+            var movies = _movieService.GetAll();
+
+            // Filter movies by cinema
+            //if (!string.IsNullOrEmpty(cinema))
+            //{
+            //    movies = movies.Where(m => m.Showtimes.Cinema == cinema);
+            //}
+
+            // Filter movies by genres
+            if (genres != null && genres.Count > 0)
+            {
+                movies = movies.Where(m =>  genres.Contains(m.Genre.GenreId.ToString()));
+            }
+
+            // Create the view model with the filtered movies
+            MoviesPage_ViewModel viewModel = new MoviesPage_ViewModel()
+            {
+                Movies = movies.ToList(),
+                Screens = _screenService.GetSelectListOf_Screens(),
+                Cinemas = _cinemaService.GetSelectListOf_Cinemas(),
+                Genres = _genresServices.GetSelectListOf_Genres()
+            };
+
+            return View("AllMovies", viewModel);
+        }
     }
 }
