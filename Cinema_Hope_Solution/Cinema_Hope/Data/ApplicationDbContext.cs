@@ -32,6 +32,26 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
         modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("RoLeClaims", "security");
         modelBuilder.Entity<IdentityUserToken<string>>().ToTable("UserTokens", "security");
 
+
+        // Seed Roles To System
+        modelBuilder.Entity<IdentityRole>().HasData(
+                   new IdentityRole()
+                   {
+                       Id = Guid.NewGuid().ToString(),
+                       Name = "Admin",
+                       NormalizedName = "admin",
+                       ConcurrencyStamp = Guid.NewGuid().ToString()
+                   },
+                   new IdentityRole()
+                   {
+                       Id = Guid.NewGuid().ToString(),
+                       Name = "User",
+                       NormalizedName = "user",
+                       ConcurrencyStamp = Guid.NewGuid().ToString()
+                   }
+               );
+
+
         // Call Models Configurations here :
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(MovieConfiguration).Assembly);
 
