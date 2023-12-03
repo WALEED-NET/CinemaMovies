@@ -101,10 +101,10 @@
                                 <span class="text-white">@movie.Genre.Name</span>
                             </div>
                             <div class="hover-buttons">
-                                <span class="btn btn-hover iq-button">
+                                <a class="btn btn-hover iq-button" asp-action="UserBookingMovie" asp-route-id="@movie.MovieId" asp-controller="Bookings">
                                     <i class="fa fa-play mr-1"></i>
                                     Play Now
-                                </span>
+                                </a>
                             </div>
                         </div>
                         <div class="block-social-info">

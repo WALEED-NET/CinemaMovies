@@ -2,6 +2,7 @@
 using Humanizer;
 using System.Threading.Channels;
 using System;
+using Cinema_Hope.Models;
 
 namespace Cinema_Hope.Services
 {

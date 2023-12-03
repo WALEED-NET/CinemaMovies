@@ -7,9 +7,10 @@
         private readonly IShowTimeService _showTimeService;
         private readonly ISeatService _seatService;
         private readonly ICinemaService _cinemaService;
+        private readonly IMovieService _movieService;
         private readonly IMapper _mapper;
 
-        public BookingsController(ApplicationDbContext context, IBookingService bookingService, IShowTimeService showTimeService, ISeatService seatService, IMapper mapper, ICinemaService cinemaService)
+        public BookingsController(ApplicationDbContext context, IBookingService bookingService, IShowTimeService showTimeService, ISeatService seatService, IMapper mapper, ICinemaService cinemaService, IMovieService movieService)
         {
             _context = context;
             _bookingService = bookingService;
@@ -17,6 +18,7 @@
             _seatService = seatService;
             _mapper = mapper;
             _cinemaService = cinemaService;
+            _movieService = movieService;
         }
 
         public async Task<IActionResult> Index()
@@ -136,5 +138,19 @@
             return isDeleted ? Ok() : BadRequest("Bad Request");
 
         }
+
+        [HttpGet]
+        public IActionResult UserBookingMovie(int id)   // movieId
+        {
+            Page_BookingViewModel viewModel = new Page_BookingViewModel()
+            {
+                Movie = _movieService.GetById(id)
+
+
+
+            };
+            return View(viewModel);
+        }
+
     }
 }

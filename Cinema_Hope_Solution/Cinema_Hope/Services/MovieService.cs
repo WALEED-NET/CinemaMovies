@@ -110,6 +110,7 @@ namespace Cinema_Hope.Services
         {
             return _context.Movies
                .Include(m => m.Genre)
+               .Include(m => m.Showtimes).ThenInclude(sh => sh.Screen)
                //.AsNoTracking()
                .SingleOrDefault( m => m.MovieId == id);
         }

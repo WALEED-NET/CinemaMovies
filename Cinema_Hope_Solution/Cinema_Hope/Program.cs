@@ -1,4 +1,6 @@
 
+using System.Text.Json.Serialization;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -21,6 +23,11 @@ builder.Services.AddAutoMapper(typeof(Program));    // add AutoMapper.
 
 builder.Services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation(); // I Add this For Speed The  changes in your views immediately without rebuilding the project.
+
+builder.Services.AddControllers().AddJsonOptions(   options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+});
 
 var app = builder.Build();
 
