@@ -110,7 +110,7 @@
                     <div class="card_month crd">
                         @foreach (var showtime in Model.Movie.Showtimes)
                         {
-                            <li>
+                            <li data-id="@showtime.ShowTimeId">
                                 <h6>@showtime.Screen.ScreenType</h6>
                                 <h6>@showtime.StartTime.ToShortTimeString()</h6>
                             </li>
@@ -127,7 +127,7 @@
             <!-- chairs  -->
             <div class="chair" id="chair">
                 <div class="row">
-                    <span>row1</span>
+                    <span>ROW 1</span>
                     @foreach (var seat in Model.Movie.Showtimes)
                     {
 
@@ -156,10 +156,10 @@
                     <li class="seat">300</li>
                     <li class="seat">300</li>
                     <li class="seat">300</li>
-                    <span>row1</span>
+                    <span>ROW 1</span>
                 </div>
                 <div class="row">
-                    <span>J</span>
+                    <span>ROW 2</span>
                     <li class="seat">560</li>
                     <li class="seat">560</li>
                     <li class="seat">560</li>
@@ -184,10 +184,10 @@
                     <li class="seat">560</li>
                     <li class="seat">560</li>
                     <li class="seat">560</li>
-                    <span>J</span>
+                    <span>ROW 2</span>
                 </div>
                 <div class="row">
-                    <span>J</span>
+                    <span>ROW 3</span>
                     <li class="seat">560</li>
                     <li class="seat">560</li>
                     <li class="seat">560</li>
@@ -212,10 +212,10 @@
                     <li class="seat">560</li>
                     <li class="seat">560</li>
                     <li class="seat">560</li>
-                    <span>J</span>
+                    <span>ROW 3</span>
                 </div>
                 <div class="row">
-                    <span>J</span>
+                    <span>ROW 4</span>
                     <li class="seat">560</li>
                     <li class="seat">560</li>
                     <li class="seat">560</li>
@@ -240,10 +240,10 @@
                     <li class="seat">560</li>
                     <li class="seat">560</li>
                     <li class="seat">560</li>
-                    <span>J</span>
+                    <span>ROW 4</span>
                 </div>
                 <div class="row">
-                    <span>J</span>
+                    <span>ROW 5</span>
                     <li class="seat">560</li>
                     <li class="seat">560</li>
                     <li class="seat">560</li>
@@ -268,10 +268,10 @@
                     <li class="seat">560</li>
                     <li class="seat">560</li>
                     <li class="seat">560</li>
-                    <span>J</span>
+                    <span>ROW 5</span>
                 </div>
                 <div class="row">
-                    <span>J</span>
+                    <span>ROW 6</span>
                     <li class="seat">560</li>
                     <li class="seat">560</li>
                     <li class="seat">560</li>
@@ -296,10 +296,10 @@
                     <li class="seat">560</li>
                     <li class="seat">560</li>
                     <li class="seat">560</li>
-                    <span>J</span>
+                    <span>ROW 6</span>
                 </div>
                 <div class="row">
-                    <span>J</span>
+                    <span>ROW 7</span>
                     <li class="seat">560</li>
                     <li class="seat">560</li>
                     <li class="seat">560</li>
@@ -324,7 +324,7 @@
                     <li class="seat">560</li>
                     <li class="seat">560</li>
                     <li class="seat">560</li>
-                    <span>J</span>
+                    <span>ROW 7</span>
                 </div>
             </div>
 
@@ -397,6 +397,851 @@
 
     <script>
         JsBarcode("#barcode", "J18800792023");
+    </script>
+    <script>
+        const seats = document.querySelectorAll('.seat');
+        seats.forEach(seat =>
+        {
+            seat.addEventListener("click", (e) =>
+            {
+                console.log("seat")
+                e.target.classList.toggle("selected")
+            })
+        })
+
+        const chairs = document.querySelector("#chair")
+        const shows = document.querySelectorAll('.card_month li h6');
+        shows.forEach(show =>
+        {
+            console.log('hiii')
+            show.addEventListener("click", (e) =>
+            {
+                console.log('hi')
+                console.log(e.target.parentElement.dataset.id)
+
+                switch (e.target.parentElement.dataset.id)
+                {
+                    case '9':
+                        chairs.innerHTML = `
+                        <div class="row">
+        <span>ROW 1</span>
+        <li class="seat booked">100</li>
+        <li class="seat">101</li>
+        <li class="seat">102</li>
+        <li class="seat">103</li>
+        <li class="seat">104</li>
+        <li class="seat booked">105</li>
+        <li class="seat">106</li>
+        <li class="seat">107</li>
+        <li class="seat">108</li>
+        <li class="seat">109</li>
+        <li class="seat booked">110</li>
+        <li class="seat">111</li>
+        <li class="seat">112</li>
+        <li class="seat">113</li>
+        <li class="seat">114</li>
+        <li class="seat">115</li>
+        <!-- <li class="seat">116</li> -->
+        <li class="seat">117</li>
+        <li class="seat">118</li>
+        <li class="seat">119</li>
+        <li class="seat">120</li>
+        <li class="seat">121</li>
+        <li class="seat">122</li>
+        <li class="seat">123</li>
+        <li class="seat">124</li>
+        <span>ROW 1</span>
+    </div>
+    <div class="row">
+        <span>ROW 2</span>
+        <li class="seat">125</li>
+        <li class="seat">126</li>
+        <li class="seat">127</li>
+        <li class="seat">128</li>
+        <li class="seat">129</li>
+        <li class="seat">130</li>
+        <li class="seat">131</li>
+        <li class="seat">132</li>
+        <li class="seat">133</li>
+        <li class="seat">134</li>
+        <li class="seat">135</li>
+        <li class="seat">136</li>
+        <li class="seat">137</li>
+        <li class="seat">138</li>
+        <li class="seat">139</li>
+        <li class="seat">140</li>
+        <li class="seat">141</li>
+        <li class="seat booked">142</li>
+        <li class="seat">143</li>
+        <li class="seat">144</li>
+        <li class="seat">145</li>
+        <li class="seat">146</li>
+        <li class="seat">147</li>
+        <li class="seat">148</li>
+        <span>ROW 2</span>
+    </div>
+    <div class="row">
+        <span>ROW 3</span>
+        <li class="seat">149</li>
+        <li class="seat">150</li>
+        <li class="seat">151</li>
+        <li class="seat">152</li>
+        <li class="seat">153</li>
+        <li class="seat">154</li>
+        <li class="seat">155</li>
+        <li class="seat">156</li>
+        <li class="seat">157</li>
+        <li class="seat">158</li>
+        <li class="seat">159</li>
+        <li class="seat">160</li>
+        <li class="seat">161</li>
+        <li class="seat">162</li>
+        <li class="seat">163</li>
+        <li class="seat">164</li>
+        <li class="seat booked">165</li>
+        <li class="seat">166</li>
+        <li class="seat">167</li>
+        <li class="seat">168</li>
+        <li class="seat">169</li>
+        <li class="seat">170</li>
+        <li class="seat">171</li>
+        <li class="seat">172</li>
+        <span>ROW 3 </span>
+    </div>
+    <div class="row">
+        <span>ROW 4</span>
+        <li class="seat">173</li>
+        <li class="seat">174</li>
+        <li class="seat">175</li>
+        <li class="seat">176</li>
+        <li class="seat">177</li>
+        <li class="seat">178</li>
+        <li class="seat">179</li>
+        <li class="seat">180</li>
+        <li class="seat">181</li>
+        <li class="seat">182</li>
+        <li class="seat">183</li>
+        <li class="seat">184</li>
+        <li class="seat">185</li>
+        <li class="seat">186</li>
+        <li class="seat">187</li>
+        <li class="seat">188</li>
+        <li class="seat">189</li>
+        <li class="seat">190</li>
+        <li class="seat">191</li>
+        <li class="seat">192</li>
+        <li class="seat">193</li>
+        <li class="seat">194</li>
+        <li class="seat">195</li>
+        <li class="seat">196</li>
+        <span>ROW 4</span>
+    </div>
+    <div class="row">
+        <span>ROW 5</span>
+        <li class="seat">197</li>
+        <li class="seat">198</li>
+        <li class="seat">199</li>
+        <li class="seat">200</li>
+        <li class="seat">201</li>
+        <li class="seat">202</li>
+        <li class="seat">203</li>
+        <li class="seat">204</li>
+        <li class="seat">205</li>
+        <li class="seat">206</li>
+        <li class="seat">207</li>
+        <li class="seat">208</li>
+        <li class="seat">209</li>
+        <li class="seat">210</li>
+        <li class="seat">211</li>
+        <li class="seat">212</li>
+        <li class="seat">213</li>
+        <li class="seat">214</li>
+        <li class="seat">215</li>
+        <li class="seat">216</li>
+        <li class="seat">217</li>
+        <li class="seat">218</li>
+        <li class="seat">219</li>
+        <li class="seat">220</li>
+        <span>ROW 5</span>
+    </div>
+    <div class="row">
+        <span>ROW 6</span>
+        <li class="seat">201</li>
+        <li class="seat">202</li>
+        <li class="seat">203</li>
+        <li class="seat">204</li>
+        <li class="seat">205</li>
+        <li class="seat">206</li>
+        <li class="seat">207</li>
+        <li class="seat">208</li>
+        <li class="seat">209</li>
+        <li class="seat">210</li>
+        <li class="seat">211</li>
+        <li class="seat">212</li>
+        <li class="seat">213</li>
+        <li class="seat">214</li>
+        <li class="seat">215</li>
+        <li class="seat">216</li>
+        <li class="seat">217</li>
+        <li class="seat">218</li>
+        <li class="seat">219</li>
+        <li class="seat">220</li>
+        <li class="seat">221</li>
+        <li class="seat">222</li>
+        <li class="seat">223</li>
+        <li class="seat">224</li>
+        <span>ROW 6</span>
+    </div>
+    <div class="row">
+        <span>ROW 7</span>
+        <li class="seat">225</li>
+        <li class="seat">226</li>
+        <li class="seat">227</li>
+        <li class="seat">228</li>
+        <li class="seat">229</li>
+        <li class="seat">230</li>
+        <li class="seat">231</li>
+        <li class="seat">232</li>
+        <li class="seat">233</li>
+        <li class="seat">234</li>
+        <li class="seat">235</li>
+        <li class="seat">236</li>
+        <li class="seat">237</li>
+        <li class="seat">238</li>
+        <li class="seat">239</li>
+        <li class="seat">240</li>
+        <li class="seat">241</li>
+        <li class="seat">242</li>
+        <li class="seat">243</li>
+        <li class="seat">244</li>
+
+        <li class="seat">245</li>
+        <li class="seat">246</li>
+        <li class="seat">247</li>
+        <li class="seat">248</li>
+
+        <span>ROW 7</span>
+    </div>`
+                        break;
+                    case '10':
+                        chairs.innerHTML = `
+                        <div class="row">
+        <span>ROW 1</span>
+        <li class="seat booked">100</li>
+        <li class="seat booked">101</li>
+        <li class="seat">102</li>
+        <li class="seat">103</li>
+        <li class="seat">104</li>
+        <li class="seat">105</li>
+        <li class="seat">106</li>
+        <li class="seat">107</li>
+        <li class="seat">108</li>
+        <li class="seat">109</li>
+        <li class="seat">110</li>
+        <li class="seat">111</li>
+        <li class="seat">112</li>
+        <li class="seat">113</li>
+        <li class="seat">114</li>
+        <li class="seat">115</li>
+        <!-- <li class="seat">116</li> -->
+        <li class="seat">117</li>
+        <li class="seat">118</li>
+        <li class="seat">119</li>
+        <li class="seat">120</li>
+        <li class="seat">121</li>
+        <li class="seat">122</li>
+        <li class="seat">123</li>
+        <li class="seat">124</li>
+        <span>ROW 1</span>
+    </div>
+    <div class="row">
+        <span>ROW 2</span>
+        <li class="seat">125</li>
+        <li class="seat">126</li>
+        <li class="seat">127</li>
+        <li class="seat">128</li>
+        <li class="seat">129</li>
+        <li class="seat">130</li>
+        <li class="seat">131</li>
+        <li class="seat">132</li>
+        <li class="seat">133</li>
+        <li class="seat booked">134</li>
+        <li class="seat">135</li>
+        <li class="seat">136</li>
+        <li class="seat">137</li>
+        <li class="seat">138</li>
+        <li class="seat">139</li>
+        <li class="seat">140</li>
+        <li class="seat">141</li>
+        <li class="seat">142</li>
+        <li class="seat">143</li>
+        <li class="seat">144</li>
+        <li class="seat">145</li>
+        <li class="seat">146</li>
+        <li class="seat">147</li>
+        <li class="seat">148</li>
+        <span>ROW 2</span>
+    </div>
+    <div class="row">
+        <span>ROW 3</span>
+        <li class="seat">149</li>
+        <li class="seat">150</li>
+        <li class="seat">151</li>
+        <li class="seat">152</li>
+        <li class="seat">153</li>
+        <li class="seat">154</li>
+        <li class="seat">155</li>
+        <li class="seat">156</li>
+        <li class="seat">157</li>
+        <li class="seat">158</li>
+        <li class="seat">159</li>
+        <li class="seat booked">160</li>
+        <li class="seat">161</li>
+        <li class="seat">162</li>
+        <li class="seat">163</li>
+        <li class="seat">164</li>
+        <li class="seat">165</li>
+        <li class="seat">166</li>
+        <li class="seat">167</li>
+        <li class="seat">168</li>
+        <li class="seat">169</li>
+        <li class="seat">170</li>
+        <li class="seat">171</li>
+        <li class="seat">172</li>
+        <span>ROW 3 </span>
+    </div>
+    <div class="row">
+        <span>ROW 4</span>
+        <li class="seat">173</li>
+        <li class="seat">174</li>
+        <li class="seat">175</li>
+        <li class="seat">176</li>
+        <li class="seat">177</li>
+        <li class="seat booked">178</li>
+        <li class="seat">179</li>
+        <li class="seat">180</li>
+        <li class="seat">181</li>
+        <li class="seat">182</li>
+        <li class="seat">183</li>
+        <li class="seat">184</li>
+        <li class="seat">185</li>
+        <li class="seat">186</li>
+        <li class="seat">187</li>
+        <li class="seat">188</li>
+        <li class="seat">189</li>
+        <li class="seat">190</li>
+        <li class="seat">191</li>
+        <li class="seat">192</li>
+        <li class="seat">193</li>
+        <li class="seat">194</li>
+        <li class="seat">195</li>
+        <li class="seat">196</li>
+        <span>ROW 4</span>
+    </div>
+    <div class="row">
+        <span>ROW 5</span>
+        <li class="seat">197</li>
+        <li class="seat">198</li>
+        <li class="seat">199</li>
+        <li class="seat">200</li>
+        <li class="seat">201</li>
+        <li class="seat">202</li>
+        <li class="seat">203</li>
+        <li class="seat">204</li>
+        <li class="seat">205</li>
+        <li class="seat">206</li>
+        <li class="seat">207</li>
+        <li class="seat">208</li>
+        <li class="seat">209</li>
+        <li class="seat">210</li>
+        <li class="seat">211</li>
+        <li class="seat">212</li>
+        <li class="seat">213</li>
+        <li class="seat">214</li>
+        <li class="seat">215</li>
+        <li class="seat">216</li>
+        <li class="seat">217</li>
+        <li class="seat">218</li>
+        <li class="seat">219</li>
+        <li class="seat">220</li>
+        <span>ROW 5</span>
+    </div>
+    <div class="row">
+        <span>ROW 6</span>
+        <li class="seat">201</li>
+        <li class="seat">202</li>
+        <li class="seat">203</li>
+        <li class="seat">204</li>
+        <li class="seat">205</li>
+        <li class="seat">206</li>
+        <li class="seat">207</li>
+        <li class="seat">208</li>
+        <li class="seat">209</li>
+        <li class="seat">210</li>
+        <li class="seat">211</li>
+        <li class="seat">212</li>
+        <li class="seat">213</li>
+        <li class="seat">214</li>
+        <li class="seat">215</li>
+        <li class="seat">216</li>
+        <li class="seat">217</li>
+        <li class="seat">218</li>
+        <li class="seat">219</li>
+        <li class="seat">220</li>
+        <li class="seat">221</li>
+        <li class="seat">222</li>
+        <li class="seat">223</li>
+        <li class="seat">224</li>
+        <span>ROW 6</span>
+    </div>
+    <div class="row">
+        <span>ROW 7</span>
+        <li class="seat">225</li>
+        <li class="seat">226</li>
+        <li class="seat">227</li>
+        <li class="seat">228</li>
+        <li class="seat">229</li>
+        <li class="seat">230</li>
+        <li class="seat">231</li>
+        <li class="seat">232</li>
+        <li class="seat">233</li>
+        <li class="seat">234</li>
+        <li class="seat">235</li>
+        <li class="seat">236</li>
+        <li class="seat">237</li>
+        <li class="seat">238</li>
+        <li class="seat">239</li>
+        <li class="seat">240</li>
+        <li class="seat">241</li>
+        <li class="seat">242</li>
+        <li class="seat">243</li>
+        <li class="seat">244</li>
+
+        <li class="seat">245</li>
+        <li class="seat">246</li>
+        <li class="seat">247</li>
+        <li class="seat">248</li>
+
+        <span>ROW 7</span>
+    </div>`
+                        break;
+                    case '2':
+                        chairs.innerHTML = `
+                        <div class="row">
+        <span>ROW 1</span>
+        <li class="seat booked">100</li>
+        <li class="seat">101</li>
+        <li class="seat booked">102</li>
+        <li class="seat">103</li>
+        <li class="seat">104</li>
+        <li class="seat">105</li>
+        <li class="seat">106</li>
+        <li class="seat">107</li>
+        <li class="seat">108</li>
+        <li class="seat">109</li>
+        <li class="seat">110</li>
+        <li class="seat">111</li>
+        <li class="seat">112</li>
+        <li class="seat">113</li>
+        <li class="seat">114</li>
+        <li class="seat">115</li>
+        <!-- <li class="seat">116</li> -->
+        <li class="seat">117</li>
+        <li class="seat">118</li>
+        <li class="seat">119</li>
+        <li class="seat">120</li>
+        <li class="seat booked">121</li>
+        <li class="seat">122</li>
+        <li class="seat">123</li>
+        <li class="seat">124</li>
+        <span>ROW 1</span>
+    </div>
+    <div class="row">
+        <span>ROW 2</span>
+        <li class="seat">125</li>
+        <li class="seat">126</li>
+        <li class="seat">127</li>
+        <li class="seat">128</li>
+        <li class="seat">129</li>
+        <li class="seat">130</li>
+        <li class="seat">131</li>
+        <li class="seat">132</li>
+        <li class="seat booked">133</li>
+        <li class="seat">134</li>
+        <li class="seat">135</li>
+        <li class="seat">136</li>
+        <li class="seat">137</li>
+        <li class="seat">138</li>
+        <li class="seat">139</li>
+        <li class="seat">140</li>
+        <li class="seat">141</li>
+        <li class="seat">142</li>
+        <li class="seat">143</li>
+        <li class="seat">144</li>
+        <li class="seat">145</li>
+        <li class="seat">146</li>
+        <li class="seat">147</li>
+        <li class="seat">148</li>
+        <span>ROW 2</span>
+    </div>
+    <div class="row">
+        <span>ROW 3</span>
+        <li class="seat">149</li>
+        <li class="seat">150</li>
+        <li class="seat">151</li>
+        <li class="seat">152</li>
+        <li class="seat">153</li>
+        <li class="seat">154</li>
+        <li class="seat">155</li>
+        <li class="seat">156</li>
+        <li class="seat booked">157</li>
+        <li class="seat">158</li>
+        <li class="seat">159</li>
+        <li class="seat">160</li>
+        <li class="seat">161</li>
+        <li class="seat">162</li>
+        <li class="seat">163</li>
+        <li class="seat">164</li>
+        <li class="seat">165</li>
+        <li class="seat">166</li>
+        <li class="seat">167</li>
+        <li class="seat">168</li>
+        <li class="seat">169</li>
+        <li class="seat">170</li>
+        <li class="seat">171</li>
+        <li class="seat">172</li>
+        <span>ROW 3 </span>
+    </div>
+    <div class="row">
+        <span>ROW 4</span>
+        <li class="seat">173</li>
+        <li class="seat">174</li>
+        <li class="seat">175</li>
+        <li class="seat">176</li>
+        <li class="seat">177</li>
+        <li class="seat">178</li>
+        <li class="seat">179</li>
+        <li class="seat">180</li>
+        <li class="seat">181</li>
+        <li class="seat">182</li>
+        <li class="seat">183</li>
+        <li class="seat">184</li>
+        <li class="seat">185</li>
+        <li class="seat">186</li>
+        <li class="seat">187</li>
+        <li class="seat">188</li>
+        <li class="seat">189</li>
+        <li class="seat">190</li>
+        <li class="seat">191</li>
+        <li class="seat">192</li>
+        <li class="seat">193</li>
+        <li class="seat">194</li>
+        <li class="seat">195</li>
+        <li class="seat">196</li>
+        <span>ROW 4</span>
+    </div>
+    <div class="row">
+        <span>ROW 5</span>
+        <li class="seat">197</li>
+        <li class="seat">198</li>
+        <li class="seat">199</li>
+        <li class="seat">200</li>
+        <li class="seat">201</li>
+        <li class="seat">202</li>
+        <li class="seat">203</li>
+        <li class="seat">204</li>
+        <li class="seat">205</li>
+        <li class="seat">206</li>
+        <li class="seat">207</li>
+        <li class="seat">208</li>
+        <li class="seat">209</li>
+        <li class="seat">210</li>
+        <li class="seat">211</li>
+        <li class="seat">212</li>
+        <li class="seat">213</li>
+        <li class="seat">214</li>
+        <li class="seat">215</li>
+        <li class="seat">216</li>
+        <li class="seat">217</li>
+        <li class="seat">218</li>
+        <li class="seat">219</li>
+        <li class="seat">220</li>
+        <span>ROW 5</span>
+    </div>
+    <div class="row">
+        <span>ROW 6</span>
+        <li class="seat">201</li>
+        <li class="seat">202</li>
+        <li class="seat booked">203</li>
+        <li class="seat">204</li>
+        <li class="seat">205</li>
+        <li class="seat">206</li>
+        <li class="seat">207</li>
+        <li class="seat">208</li>
+        <li class="seat">209</li>
+        <li class="seat">210</li>
+        <li class="seat">211</li>
+        <li class="seat">212</li>
+        <li class="seat">213</li>
+        <li class="seat">214</li>
+        <li class="seat">215</li>
+        <li class="seat">216</li>
+        <li class="seat">217</li>
+        <li class="seat">218</li>
+        <li class="seat">219</li>
+        <li class="seat">220</li>
+        <li class="seat">221</li>
+        <li class="seat">222</li>
+        <li class="seat">223</li>
+        <li class="seat">224</li>
+        <span>ROW 6</span>
+    </div>
+    <div class="row">
+        <span>ROW 7</span>
+        <li class="seat">225</li>
+        <li class="seat">226</li>
+        <li class="seat">227</li>
+        <li class="seat">228</li>
+        <li class="seat">229</li>
+        <li class="seat">230</li>
+        <li class="seat">231</li>
+        <li class="seat">232</li>
+        <li class="seat">233</li>
+        <li class="seat">234</li>
+        <li class="seat">235</li>
+        <li class="seat">236</li>
+        <li class="seat">237</li>
+        <li class="seat">238</li>
+        <li class="seat">239</li>
+        <li class="seat">240</li>
+        <li class="seat">241</li>
+        <li class="seat">242</li>
+        <li class="seat">243</li>
+        <li class="seat">244</li>
+
+        <li class="seat">245</li>
+        <li class="seat">246</li>
+        <li class="seat">247</li>
+        <li class="seat">248</li>
+
+        <span>ROW 7</span>
+    </div>`
+                        break;
+                    case '3':
+                        chairs.innerHTML = `
+                        <div class="row">
+        <span>ROW 1</span>
+        <li class="seat booked">100</li>
+        <li class="seat">101</li>
+        <li class="seat booked">102</li>
+        <li class="seat">103</li>
+        <li class="seat">104</li>
+        <li class="seat">105</li>
+        <li class="seat">106</li>
+        <li class="seat">107</li>
+        <li class="seat">108</li>
+        <li class="seat">109</li>
+        <li class="seat">110</li>
+        <li class="seat">111</li>
+        <li class="seat">112</li>
+        <li class="seat">113</li>
+        <li class="seat">114</li>
+        <li class="seat">115</li>
+        <!-- <li class="seat">116</li> -->
+        <li class="seat">117</li>
+        <li class="seat">118</li>
+        <li class="seat">119</li>
+        <li class="seat">120</li>
+        <li class="seat booked">121</li>
+        <li class="seat">122</li>
+        <li class="seat">123</li>
+        <li class="seat">124</li>
+        <span>ROW 1</span>
+    </div>
+    <div class="row">
+        <span>ROW 2</span>
+        <li class="seat">125</li>
+        <li class="seat">126</li>
+        <li class="seat">127</li>
+        <li class="seat">128</li>
+        <li class="seat">129</li>
+        <li class="seat">130</li>
+        <li class="seat">131</li>
+        <li class="seat">132</li>
+        <li class="seat booked">133</li>
+        <li class="seat">134</li>
+        <li class="seat">135</li>
+        <li class="seat">136</li>
+        <li class="seat">137</li>
+        <li class="seat booked">138</li>
+        <li class="seat">139</li>
+        <li class="seat">140</li>
+        <li class="seat">141</li>
+        <li class="seat">142</li>
+        <li class="seat">143</li>
+        <li class="seat">144</li>
+        <li class="seat">145</li>
+        <li class="seat">146</li>
+        <li class="seat">147</li>
+        <li class="seat">148</li>
+        <span>ROW 2</span>
+    </div>
+    <div class="row">
+        <span>ROW 3</span>
+        <li class="seat">149</li>
+        <li class="seat">150</li>
+        <li class="seat">151</li>
+        <li class="seat">152</li>
+        <li class="seat">153</li>
+        <li class="seat">154</li>
+        <li class="seat">155</li>
+        <li class="seat">156</li>
+        <li class="seat booked">157</li>
+        <li class="seat">158</li>
+        <li class="seat">159</li>
+        <li class="seat">160</li>
+        <li class="seat">161</li>
+        <li class="seat">162</li>
+        <li class="seat">163</li>
+        <li class="seat">164</li>
+        <li class="seat">165</li>
+        <li class="seat">166</li>
+        <li class="seat">167</li>
+        <li class="seat">168</li>
+        <li class="seat">169</li>
+        <li class="seat">170</li>
+        <li class="seat">171</li>
+        <li class="seat">172</li>
+        <span>ROW 3 </span>
+    </div>
+    <div class="row">
+        <span>ROW 4</span>
+        <li class="seat">173</li>
+        <li class="seat">174</li>
+        <li class="seat">175</li>
+        <li class="seat">176</li>
+        <li class="seat">177</li>
+        <li class="seat">178</li>
+        <li class="seat">179</li>
+        <li class="seat">180</li>
+        <li class="seat">181</li>
+        <li class="seat">182</li>
+        <li class="seat">183</li>
+        <li class="seat">184</li>
+        <li class="seat">185</li>
+        <li class="seat">186</li>
+        <li class="seat">187</li>
+        <li class="seat">188</li>
+        <li class="seat">189</li>
+        <li class="seat">190</li>
+        <li class="seat">191</li>
+        <li class="seat">192</li>
+        <li class="seat">193</li>
+        <li class="seat">194</li>
+        <li class="seat">195</li>
+        <li class="seat">196</li>
+        <span>ROW 4</span>
+    </div>
+    <div class="row">
+        <span>ROW 5</span>
+        <li class="seat">197</li>
+        <li class="seat">198</li>
+        <li class="seat">199</li>
+        <li class="seat">200</li>
+        <li class="seat">201</li>
+        <li class="seat">202</li>
+        <li class="seat">203</li>
+        <li class="seat">204</li>
+        <li class="seat">205</li>
+        <li class="seat">206</li>
+        <li class="seat">207</li>
+        <li class="seat">208</li>
+        <li class="seat">209</li>
+        <li class="seat">210</li>
+        <li class="seat">211</li>
+        <li class="seat">212</li>
+        <li class="seat">213</li>
+        <li class="seat">214</li>
+        <li class="seat">215</li>
+        <li class="seat">216</li>
+        <li class="seat">217</li>
+        <li class="seat">218</li>
+        <li class="seat">219</li>
+        <li class="seat">220</li>
+        <span>ROW 5</span>
+    </div>
+    <div class="row">
+        <span>ROW 6</span>
+        <li class="seat">201</li>
+        <li class="seat">202</li>
+        <li class="seat booked">203</li>
+        <li class="seat">204</li>
+        <li class="seat">205</li>
+        <li class="seat">206</li>
+        <li class="seat">207</li>
+        <li class="seat">208</li>
+        <li class="seat">209</li>
+        <li class="seat">210</li>
+        <li class="seat">211</li>
+        <li class="seat">212</li>
+        <li class="seat">213</li>
+        <li class="seat">214</li>
+        <li class="seat">215</li>
+        <li class="seat">216</li>
+        <li class="seat">217</li>
+        <li class="seat">218</li>
+        <li class="seat">219</li>
+        <li class="seat">220</li>
+        <li class="seat">221</li>
+        <li class="seat">222</li>
+        <li class="seat">223</li>
+        <li class="seat">224</li>
+        <span>ROW 6</span>
+    </div>
+    <div class="row">
+        <span>ROW 7</span>
+        <li class="seat">225</li>
+        <li class="seat">226</li>
+        <li class="seat">227</li>
+        <li class="seat">228</li>
+        <li class="seat">229</li>
+        <li class="seat">230</li>
+        <li class="seat">231</li>
+        <li class="seat">232</li>
+        <li class="seat">233</li>
+        <li class="seat">234</li>
+        <li class="seat">235</li>
+        <li class="seat">236</li>
+        <li class="seat">237</li>
+        <li class="seat">238</li>
+        <li class="seat">239</li>
+        <li class="seat">240</li>
+        <li class="seat">241</li>
+        <li class="seat">242</li>
+        <li class="seat">243</li>
+        <li class="seat">244</li>
+
+        <li class="seat">245</li>
+        <li class="seat">246</li>
+        <li class="seat">247</li>
+        <li class="seat">248</li>
+
+        <span>ROW 7</span>
+    </div>`
+                        break;
+                }
+            })
+        })
+
+        // add select class
+        // const seatss = document.querySelectorAll('.seat');
+        // seats.forEach(seat => {
+        //     seat.addEventListener("click",(e) => {
+        //         // console.log("hi")
+        //         e.target.classList.toggle("selected")
+        //     })
+        // })
+
     </script>
 </body>
 

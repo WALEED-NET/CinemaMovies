@@ -2,7 +2,7 @@
 
 namespace Cinema_Hope.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class MoviesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,6 +20,7 @@ namespace Cinema_Hope.Controllers
             _cinemaService = cinemaService;
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             IEnumerable<Movie> movies = _movieService.GetAll();
@@ -36,6 +37,7 @@ namespace Cinema_Hope.Controllers
             return View(movie);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Create()
         {
@@ -130,7 +132,7 @@ namespace Cinema_Hope.Controllers
             return isDeleted ? Ok() : BadRequest() ;
         }
 
-
+        
         public IActionResult AllMovies()
         {
             MoviesPage_ViewModel viewModel = new MoviesPage_ViewModel()
