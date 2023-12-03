@@ -162,6 +162,14 @@ namespace Cinema_Hope.Controllers
 
         }
 
-       
+        [HttpGet]
+        public IActionResult ScreenSeats(int id) // screenId
+        {
+
+            var screenSeats = _screenService.GetScreenSeats(id);
+
+            return Ok(screenSeats);
+
+        }
     }
 }

@@ -11,5 +11,6 @@
 
         IEnumerable<SelectListItem> GetSelectListOf_ScreenType();
         IEnumerable<SelectListItem> GetSelectListOf_Screens();
+        IEnumerable<Seat> GetScreenSeats(int screenId);
     }
 }

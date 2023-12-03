@@ -118,5 +118,11 @@ namespace Cinema_Hope.Services
                 }).OrderBy(s => s.Text);
 
         }
+
+        public IEnumerable<Seat> GetScreenSeats(int screenId)
+        {
+            var ScreenSeats = _context.Seats.Where(seat => seat.ScreenId == screenId).ToList();
+            return ScreenSeats;
+        }
     }
 }
