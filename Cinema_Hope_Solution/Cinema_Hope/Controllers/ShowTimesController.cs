@@ -1,5 +1,6 @@
 ﻿namespace Cinema_Hope.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ShowTimesController : Controller
     {
         private readonly ApplicationDbContext _context;

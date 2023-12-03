@@ -1,7 +1,10 @@
 ﻿using Cinema_Hope.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cinema_Hope.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class SeatsController : Controller
     {
         private readonly ApplicationDbContext _context;

@@ -1,8 +1,6 @@
-﻿using Cinema_Hope.Enums;
-using Cinema_Hope.Models;
-
-namespace Cinema_Hope.Controllers
+﻿namespace Cinema_Hope.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ScreensController : Controller
     {
         private readonly ApplicationDbContext _context;

@@ -16,6 +16,8 @@ global using Cinema_Hope.Dtos;
 global using Microsoft.AspNetCore.Identity;
 global using System;
 global using System.Text.Json.Serialization;
-
+global using Cinema_Hope.Enums;
+global using Cinema_Hope.Models;
+global using Microsoft.AspNetCore.Authorization;
 
 

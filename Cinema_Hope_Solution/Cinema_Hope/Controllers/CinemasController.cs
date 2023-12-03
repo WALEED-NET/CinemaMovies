@@ -1,5 +1,8 @@
-﻿namespace Cinema_Hope.Controllers
+﻿using Microsoft.AspNetCore.Authorization;
+
+namespace Cinema_Hope.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CinemasController : Controller
     {
         private readonly ApplicationDbContext _context;

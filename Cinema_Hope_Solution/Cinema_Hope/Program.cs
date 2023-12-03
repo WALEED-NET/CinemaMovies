@@ -36,6 +36,23 @@ builder.Services.AddControllers().AddJsonOptions(   options =>
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
 });
 
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    // Password settings
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 4;
+    options.Password.RequiredUniqueChars = 0; // Allow repeated characters
+    options.Password.RequireUppercase = false;
+
+
+});
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

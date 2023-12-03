@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Cinema_Hope.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class UsersController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
@@ -13,6 +13,8 @@ namespace Cinema_Hope.Controllers
             _userManager = userManager;
             _roleManager = roleManager;
         }
+
+
         // Get List Of Users  With Their Role of each user
         public async Task<IActionResult> Index()
         {
@@ -31,16 +33,22 @@ namespace Cinema_Hope.Controllers
                 });
             }
 
-            //List<UserViewModel> usersWithRoles = await _userManager.Users.Select(user => new UserViewModel
-            //{
-            //    Id = user.Id,
-            //    FirstName = user.FirstName,
-            //    LastName = user.LastName,
-            //    Email = user.Email,
-            //    UserName = user.UserName,
-            //    Roles = _userManager.GetRolesAsync(user).Result
-            //}).ToListAsync();
             return View(userViewModels);
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var userInDB = await _userManager.FindByIdAsync(id);
+            if (userInDB == null)
+                return NotFound();
+            var result = await _userManager.DeleteAsync(userInDB);
+            if (!result.Succeeded)
+                throw new Exception();
+            // Good
+            return Ok();
+        }
+
+
     }
 }
