@@ -37,8 +37,13 @@
                                     <span class="navbar-menu-icon navbar-menu-icon--bottom"></span>
                                 </div>
                             </a>
-                            <a href="index.html" class="navbar-brand">
-                                <img src="images/logo.png" class="img-fluid logo" alt="" />
+                            <a href="index.html" class="navbar-brand" style="
+    color: rgb(229 9 20);
+    font-size: 24px;
+    font-weight: bold;
+">
+                                @* <img src="images/logo.png" class="img-fluid logo" alt="" />/ *@
+                                Ticket station
                             </a>
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <div class="menu-main-menu-container">
@@ -47,31 +52,12 @@
                                         </li>
                                         <li class="menu-item"><a asp-action="AllMovies"
                                                 asp-controller="Movies">Movies</a></li>
-                                        <li class="menu-item"><a href="#">Shows</a></li>
+                                        <li class="menu-item"><a asp-action="UserTickets" asp-controller="Bookings">Tickts</a></li>
                                         <li class="menu-item">
-                                            <a href="#">Contact Us</a>
-                                            <ul class="sub-menu">
-                                                <li class="menu-item"><a href="#">About Us</a></li>
-                                                <li class="menu-item"><a href="#">Contact</a></li>
-                                                <li class="menu-item"><a href="#">FAQ</a></li>
-                                                <li class="menu-item">
-                                                    <a href="#">Privacy-Policy</a>
-                                                </li>
-                                                <li class="menu-item">
-                                                    <a href="#">Pricing</a>
-                                                    <ul class="sub-menu">
-                                                        <li class="menu-item">
-                                                            <a href="#">Gold Membership</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="#">Silver Membership</a>
-                                                        </li>
-                                                        <li class="menu-item">
-                                                            <a href="#">Bronze Membership</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
+                                            <a asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">Log out</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a asp-area="Identity" asp-page="/Account/Login">Log in</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -152,7 +138,7 @@
                                                 <div class="iq-sub-dropdown iq-user-dropdown">
                                                     <div class="iq-card shadow-none m-0">
                                                         <div class="iq-card-body p-0 pl-3 pr-3">
-                                                            <a href="#" class="iq-sub-card setting-dropdown">
+                                                            <a asp-action="UserTickets" asp-controller="Bookings" class="iq-sub-card setting-dropdown">
                                                                 <div class="media align-items-center">
                                                                     <div class="right-icon">
                                                                         <i class="fa fa-user text-primary"></i>

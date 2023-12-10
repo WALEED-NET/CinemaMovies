@@ -58,7 +58,7 @@ namespace Cinema_Hope.Controllers
             {
                 // after that model is not vaild remember to initialize nessury field of model before return it.
                 model.AllGeners = _genresServices.GetSelectListOf_Genres();
-
+                    
                 return View(model);
             }
 

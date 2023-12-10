@@ -152,5 +152,13 @@
             return View(viewModel);
         }
 
+        [HttpGet]
+        public IActionResult UserTickets()  
+        {
+            
+            return View();
+        }
+
+
     }
 }
